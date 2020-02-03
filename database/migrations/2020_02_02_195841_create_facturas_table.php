@@ -15,9 +15,7 @@ class CreateFacturasTable extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreign('viaje_id')
-                ->references('id')
-                ->on('viajes');
+            $table->string('viaje_id', 50)->index();
             $table->string('uploaded_by', 50);
             $table->date('fecha_upload');
             $table->date('fecha_pago');
@@ -26,7 +24,6 @@ class CreateFacturasTable extends Migration
             $table->string('moneda', 5);
             $table->decimal('subtotal', 8, 2);
             $table->decimal('descuento', 8, 2);
-            $table->decimal('total', 8, 2);
             $table->string('condiciones_de_pago', 200);
             $table->mediumText('certificado');
             $table->string('regimen_fiscal', 200);
@@ -36,8 +33,11 @@ class CreateFacturasTable extends Migration
             $table->decimal('impuestos', 8, 2);
             $table->string('complmentos', 200);
             $table->string('xml_url', 200);
-
             $table->timestamps();
+
+            $table->foreign('viaje_id')
+                ->references('id')
+                ->on('viajes');
         });
     }
 

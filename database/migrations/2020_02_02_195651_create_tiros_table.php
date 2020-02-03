@@ -15,18 +15,10 @@ class CreateTirosTable extends Migration
     {
         Schema::create('tiros', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreign('viaje_id')
-                ->references('id')
-                ->on('viajes');
-            $table->foreign('unidad_id')
-                ->references('id')
-                ->on('unidads');
-            $table->foreign('establecimiento_id')
-                ->references('id')
-                ->on('establecimientos_catalogs');
-            $table->foreign('tipo_carga_id')
-                ->references('id')
-                ->on('tipos_de_carga_catalogs');
+            $table->string('viaje_id', 50)->index();
+            $table->string('unidad_id', 50)->index();
+            $table->string('establecimiento_id', 50)->index();
+            $table->string('tipo_carga_id', 50)->index();
             $table->string('oprerador');
             $table->decimal('cantidad', 8, 2);
             $table->string('delivery', 100)->index();
@@ -35,6 +27,22 @@ class CreateTirosTable extends Migration
             $table->mediumText('notas');
             $table->string('status', 30);
             $table->timestamps();
+
+            $table->foreign('viaje_id')
+                ->references('id')
+                ->on('viajes');
+
+            $table->foreign('unidad_id')
+                ->references('id')
+                ->on('unidads');
+
+            $table->foreign('establecimiento_id')
+                ->references('id')
+                ->on('establecimientos_catalogs');
+
+            $table->foreign('tipo_carga_id')
+                ->references('id')
+                ->on('tipos_de_carga_catalogs');
         });
     }
 

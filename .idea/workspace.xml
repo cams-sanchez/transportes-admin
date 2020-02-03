@@ -3,29 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="710a9238-88a5-40c7-b700-6394ef1644d2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/EstadosReplubicaCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/EstadosReplubicaCatalog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/GastosUnidad.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/GastosUnidad.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Temporada.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Temporada.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TiposDeMantenimientoCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TiposDeMantenimientoCatalog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Tren.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Tren.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Unidad.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Unidad.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195253_create_estados_replubica_catalogs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195253_create_estados_replubica_catalogs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195419_create_tipos_de_mantenimiento_catalogs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195419_create_tipos_de_mantenimiento_catalogs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195440_create_tipos_de_gasto_catalogs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195440_create_tipos_de_gasto_catalogs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195504_create_tipos_de_carga_catalogs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195504_create_tipos_de_carga_catalogs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195540_create_temporadas_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195540_create_temporadas_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195549_create_trens_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195549_create_trens_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195601_create_viajes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195601_create_viajes_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195628_create_jefe_de_sectors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195628_create_jefe_de_sectors_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195628_create_jefe_de_sectors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195600_create_jefe_de_sectors_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195651_create_tiros_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195651_create_tiros_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195710_create_establecimientos_catalogs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195710_create_establecimientos_catalogs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195727_create_unidads_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195727_create_unidads_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195710_create_establecimientos_catalogs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195645_create_establecimientos_catalogs_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195727_create_unidads_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195640_create_unidads_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195735_create_gastos_unidads_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195735_create_gastos_unidads_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195805_create_evidencias_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195805_create_evidencias_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195817_create_incidentes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195817_create_incidentes_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195841_create_facturas_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195841_create_facturas_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_200045_create_equipo_celulars_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_200045_create_equipo_celulars_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_03_185604_create_mantenimientos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_03_185604_create_mantenimientos_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_03_203622_create_tipos_de_incidencia_catalogs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195804_create_tipos_de_incidencia_catalogs_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +179,7 @@
       <option name="presentableId" value="Default" />
       <updated>1580668535144</updated>
       <workItem from="1580668540476" duration="7680000" />
-      <workItem from="1580751865444" duration="11989000" />
+      <workItem from="1580751865444" duration="14931000" />
     </task>
     <servers />
   </component>

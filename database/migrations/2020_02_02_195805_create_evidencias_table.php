@@ -15,13 +15,15 @@ class CreateEvidenciasTable extends Migration
     {
         Schema::create('evidencias', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreign('tiro_id')
-                ->references('id')
-                ->on('tiros');
+            $table->string('tiro_id',50)->index();
             $table->dateTime('fecha_evidencia');
             $table->string('foto_url', 200);
             $table->mediumText('comantarios');
             $table->timestamps();
+
+            $table->foreign('tiro_id')
+                ->references('id')
+                ->on('tiros');
         });
     }
 

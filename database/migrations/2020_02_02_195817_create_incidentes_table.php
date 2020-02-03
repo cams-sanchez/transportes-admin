@@ -15,17 +15,21 @@ class CreateIncidentesTable extends Migration
     {
         Schema::create('incidentes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreign('tiro_id')
-                ->references('id')
-                ->on('tiros');
+            $table->string('tiro_id', 50)->index();
+            $table->string('tipo_incidencia_id', 50)->index();
             $table->dateTime('fecha_comienzo');
             $table->dateTime('fecha_termino');
-            $table->foreign('tipo_incidencia_id')
-                ->references('id')
-                ->on('tipos_de_incidencia_catalogs');
             $table->string('status');
             $table->mediumText('detalles');
             $table->timestamps();
+
+            $table->foreign('tiro_id')
+                ->references('id')
+                ->on('tiros');
+
+            $table->foreign('tipo_incidencia_id')
+                ->references('id')
+                ->on('tipos_de_incidencia_catalogs');
         });
     }
 

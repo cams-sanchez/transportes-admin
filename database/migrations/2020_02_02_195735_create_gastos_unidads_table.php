@@ -15,17 +15,21 @@ class CreateGastosUnidadsTable extends Migration
     {
         Schema::create('gastos_unidads', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreign('unidad_id')
-                ->references('id')
-                ->on('unidads');
-            $table->foreign('gasto_id')
-                ->references('id')
-                ->on('tipos_de_gasto_catalogs');
+            $table->string('unidad_id', 50)->index();
+            $table->string('gasto_id', 50)->index();
             $table->decimal('cantidad',8, 2);
             $table->decimal('total', 8, 2);
             $table->date('fecha');
             $table->string('comentarios', 200);
             $table->timestamps();
+
+            $table->foreign('unidad_id')
+                ->references('id')
+                ->on('unidads');
+
+            $table->foreign('gasto_id')
+                ->references('id')
+                ->on('tipos_de_gasto_catalogs');
         });
     }
 
