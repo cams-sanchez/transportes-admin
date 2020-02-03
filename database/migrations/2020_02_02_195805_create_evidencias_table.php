@@ -14,7 +14,13 @@ class CreateEvidenciasTable extends Migration
     public function up()
     {
         Schema::create('evidencias', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
+            $table->foreign('tiro_id')
+                ->references('id')
+                ->on('tiros');
+            $table->dateTime('fecha_evidencia');
+            $table->string('foto_url', 200);
+            $table->mediumText('comantarios');
             $table->timestamps();
         });
     }

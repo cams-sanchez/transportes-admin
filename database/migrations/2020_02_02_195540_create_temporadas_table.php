@@ -14,7 +14,14 @@ class CreateTemporadasTable extends Migration
     public function up()
     {
         Schema::create('temporadas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
+            $table->string('nombre', 200);
+            $table->string('descripcion', 200);
+            $table->date('fecha_inicio_estipulada');
+            $table->date('fecha_inicio_real');
+            $table->date('fecha_fin_estipulada');
+            $table->date('fecha_fin_real');
+            $table->unsignedBigInteger('autorizado_por');
             $table->timestamps();
         });
     }

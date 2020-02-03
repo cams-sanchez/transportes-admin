@@ -14,7 +14,15 @@ class CreateTrensTable extends Migration
     public function up()
     {
         Schema::create('trens', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
+            $table->foreign('temporada_id')
+                ->references('id')
+                ->on('temporadas');
+            $table->string('zona', 50);
+            $table->string('descripcion',200);
+            $table->date('fecha_comienzo');
+            $table->date('fecha_fin');
+
             $table->timestamps();
         });
     }

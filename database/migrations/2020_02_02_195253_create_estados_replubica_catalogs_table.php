@@ -14,7 +14,9 @@ class CreateEstadosReplubicaCatalogsTable extends Migration
     public function up()
     {
         Schema::create('estados_replubica_catalogs', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
+            $table->string('region', 100)->index();
+            $table->string('estado', 100)->index();
             $table->timestamps();
         });
     }

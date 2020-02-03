@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGastosUnidadsTable extends Migration
+class CreateMantenimientosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreateGastosUnidadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('gastos_unidads', function (Blueprint $table) {
+        Schema::create('mantenimientos', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreign('unidad_id')
                 ->references('id')
                 ->on('unidads');
-            $table->foreign('gasto_id')
+            $table->foreign('tipo_mantenimiento_id')
                 ->references('id')
-                ->on('tipos_de_gasto_catalogs');
-            $table->decimal('cantidad',8, 2);
-            $table->decimal('total', 8, 2);
-            $table->date('fecha');
-            $table->string('comentarios', 200);
+                ->on('tipos_de_mantenimiento_catalogs');
+            $table->date('fecha_entrada');
+            $table->date('fecha_salida');
+            $table->decimal('costo');
+
             $table->timestamps();
         });
     }
@@ -36,6 +36,6 @@ class CreateGastosUnidadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gastos_unidads');
+        Schema::dropIfExists('mantenimientos');
     }
 }

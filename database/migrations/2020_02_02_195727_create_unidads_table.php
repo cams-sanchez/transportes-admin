@@ -14,7 +14,14 @@ class CreateUnidadsTable extends Migration
     public function up()
     {
         Schema::create('unidads', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
+            $table->string('nombre', 100);
+            $table->string('tipo', 100);
+            $table->string('marca',100);
+            $table->string('tonelaje',20);
+            $table->string('kilometraje', 20);
+            $table->mediumText('otros_detalles');
+            $table->string('factura', 200);
             $table->timestamps();
         });
     }

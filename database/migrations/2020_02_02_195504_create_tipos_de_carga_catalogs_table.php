@@ -14,7 +14,9 @@ class CreateTiposDeCargaCatalogsTable extends Migration
     public function up()
     {
         Schema::create('tipos_de_carga_catalogs', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
+            $table->string('nombre', 100);
+            $table->string('descripcion', 200);
             $table->timestamps();
         });
     }

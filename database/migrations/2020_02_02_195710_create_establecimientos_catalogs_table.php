@@ -14,7 +14,18 @@ class CreateEstablecimientosCatalogsTable extends Migration
     public function up()
     {
         Schema::create('establecimientos_catalogs', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
+            $table->string('tipo', 100);
+            $table->string('nombre',200);
+            $table->string('calle', 200);
+            $table->string('num_ext',20);
+            $table->string('num_int', 20);
+            $table->string('cp', 6);
+            $table->string('estado', 50);
+            $table->string('municipio', 100);
+            $table->mediumText('ubicacion_gps');
+            $table->string('encargado_recibir', 200);
+            $table->mediumText('contacto');
             $table->timestamps();
         });
     }
