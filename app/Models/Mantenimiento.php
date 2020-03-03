@@ -9,11 +9,11 @@ class Mantenimiento extends Model
 {
     use UuidGenerator;
 
-    public function tipoDeMantenimiento() {
-        return $this->hasMany('App\Models\TiposDeMantenimientoCatalog');
+    public function tipo_mantenimiento() {
+        return $this->hasOne('App\Models\TiposDeMantenimientoCatalog');
     }
 
-    public function unidad() {
+    public function unidades() {
         return $this->hasMany('App\Models\Unidad');
     }
 }

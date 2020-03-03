@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\CiudadMunicipioCatalog;
+use App\Company;
 use Illuminate\Http\Request;
 
-class CiudadMunicipioCatalogController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class CiudadMunicipioCatalogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\CiudadMunicipioCatalog  $ciudadMunicipioCatalog
+     * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(CiudadMunicipioCatalog $ciudadMunicipioCatalog)
+    public function show(Company $company)
     {
         //
     }
@@ -52,10 +52,10 @@ class CiudadMunicipioCatalogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\CiudadMunicipioCatalog  $ciudadMunicipioCatalog
+     * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(CiudadMunicipioCatalog $ciudadMunicipioCatalog)
+    public function edit(Company $company)
     {
         //
     }
@@ -64,10 +64,10 @@ class CiudadMunicipioCatalogController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\CiudadMunicipioCatalog  $ciudadMunicipioCatalog
+     * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CiudadMunicipioCatalog $ciudadMunicipioCatalog)
+    public function update(Request $request, Company $company)
     {
         //
     }
@@ -75,10 +75,10 @@ class CiudadMunicipioCatalogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\CiudadMunicipioCatalog  $ciudadMunicipioCatalog
+     * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CiudadMunicipioCatalog $ciudadMunicipioCatalog)
+    public function destroy(Company $company)
     {
         //
     }

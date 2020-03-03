@@ -19,7 +19,7 @@ class CreateTirosTable extends Migration
             $table->string('unidad_id', 50)->index();
             $table->string('establecimiento_id', 50)->index();
             $table->string('tipo_carga_id', 50)->index();
-            $table->string('oprerador');
+            $table->string('oprerador_id');
             $table->decimal('cantidad', 8, 2);
             $table->string('delivery', 100)->index();
             $table->string('solicitud', 100);
@@ -43,6 +43,10 @@ class CreateTirosTable extends Migration
             $table->foreign('tipo_carga_id')
                 ->references('id')
                 ->on('tipos_de_carga_catalogs');
+
+            $table->foreign('operador_id')
+                ->references('id')
+                ->on('users');
         });
     }
 

@@ -18,7 +18,9 @@ class CreateEvidenciasTable extends Migration
             $table->string('tiro_id',50)->index();
             $table->dateTime('fecha_evidencia');
             $table->string('foto_url', 200);
-            $table->mediumText('comantarios');
+            $table->mediumText('comentarios');
+            $table->decimal('gps_location_lat', 6, 8);
+            $table->decimal('gps_location_long', 6, 8);
             $table->timestamps();
 
             $table->foreign('tiro_id')

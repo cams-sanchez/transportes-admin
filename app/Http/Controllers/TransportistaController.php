@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Operador;
+use App\Transportista;
 use Illuminate\Http\Request;
 
-class OperadorController extends Controller
+class TransportistaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class OperadorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Operador  $operador
+     * @param  \App\Transportista  $transportista
      * @return \Illuminate\Http\Response
      */
-    public function show(Operador $operador)
+    public function show(Transportista $transportista)
     {
         //
     }
@@ -52,10 +52,10 @@ class OperadorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Operador  $operador
+     * @param  \App\Transportista  $transportista
      * @return \Illuminate\Http\Response
      */
-    public function edit(Operador $operador)
+    public function edit(Transportista $transportista)
     {
         //
     }
@@ -64,10 +64,10 @@ class OperadorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Operador  $operador
+     * @param  \App\Transportista  $transportista
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Operador $operador)
+    public function update(Request $request, Transportista $transportista)
     {
         //
     }
@@ -75,10 +75,10 @@ class OperadorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Operador  $operador
+     * @param  \App\Transportista  $transportista
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Operador $operador)
+    public function destroy(Transportista $transportista)
     {
         //
     }

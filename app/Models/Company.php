@@ -1,28 +1,23 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use App\Traits\CreatedUpdatedAtDateFormat;
 use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+
+class Company extends Model
 {
     use UuidGenerator, CreatedUpdatedAtDateFormat;
 
-    public function representante_cliente()
+    public function user()
     {
-        return $this->hasOne('App\Models\RepresentanteCliente');
+        return $this->hasOne('App\Models\User');
     }
 
     public function estado_republica()
     {
         return $this->hasOne('App\Models\EstadosReplubicaCatalog');
     }
-
-    public function fiscal_estado_republica()
-    {
-        return $this->hasOne('App\Models\EstadosReplubicaCatalog');
-    }
-
 }

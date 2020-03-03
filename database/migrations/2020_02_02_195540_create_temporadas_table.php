@@ -15,6 +15,7 @@ class CreateTemporadasTable extends Migration
     {
         Schema::create('temporadas', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('representante_clientes_id', 50)->index();
             $table->string('nombre', 200);
             $table->string('descripcion', 200);
             $table->date('fecha_inicio_estipulada');
@@ -23,6 +24,11 @@ class CreateTemporadasTable extends Migration
             $table->date('fecha_fin_real');
             $table->unsignedBigInteger('autorizado_por');
             $table->timestamps();
+
+            $table->foreign('representante_clientes_id')
+                ->references('id')
+                ->on('representante_clientes');
+
         });
     }
 

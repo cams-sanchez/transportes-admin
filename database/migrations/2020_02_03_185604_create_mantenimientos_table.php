@@ -25,7 +25,7 @@ class CreateMantenimientosTable extends Migration
             $table->foreign('unidad_id')
                 ->references('id')
                 ->on('unidads');
-            
+
             $table->foreign('tipo_mantenimiento_id')
                 ->references('id')
                 ->on('tipos_de_mantenimiento_catalogs');

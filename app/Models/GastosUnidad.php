@@ -12,4 +12,8 @@ class GastosUnidad extends Model
     public function unidad() {
         return $this->belongsTo('App\Models\Unidad');
     }
+
+    public function tipo_gasto() {
+        return $this->hasOne('App\Models\TipoDeGastoCatalog');
+    }
 }

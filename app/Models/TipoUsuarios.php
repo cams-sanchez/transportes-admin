@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use App\Traits\CreatedUpdatedAtDateFormat;
 use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Model;
 
-class EquipoCelular extends Model
+class TipoUsuarios extends Model
 {
     use UuidGenerator, CreatedUpdatedAtDateFormat;
 
-    public function operador()
+    public function usuario()
     {
         return $this->belongsTo('App\Models\User');
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRepresentanteClientesTable extends Migration
+class CreateCompaniesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,31 @@ class CreateRepresentanteClientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('representante_clientes', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('cliente_id', 50)->index();
             $table->string('nombre', 200);
+            $table->string('razon_social');
+            $table->string('rfc', 20);
+            $table->string('tipo_fiscal', 200);
             $table->string('status', 50);
             $table->mediumText('contacts');
             $table->string('calle', 200);
             $table->string('num_ext',20);
             $table->string('num_int', 20);
             $table->string('cp', 6);
-            $table->string('estado', 50);
+            $table->string('estados_replubica_catalogs_id', 50)->index();
             $table->string('municipio', 100);
+            $table->string('fiscal_calle', 200);
+            $table->string('fiscal_num_ext',20);
+            $table->string('fiscal_num_int', 20);
+            $table->string('fiscal_cp', 6);
+            $table->string('fiscal_estado', 50);
+            $table->string('fiscal_municipio', 100);
             $table->timestamps();
 
-            $table->foreign('cliente_id')
+            $table->foreign('estados_replubica_catalogs_id')
                 ->references('id')
-                ->on('clientes');
+                ->on('estados_replubica_catalogs');
         });
     }
 
@@ -40,6 +48,6 @@ class CreateRepresentanteClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('representante_clientes');
+        Schema::dropIfExists('companies');
     }
 }

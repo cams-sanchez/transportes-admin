@@ -16,10 +16,11 @@ class CreateViajesTable extends Migration
         Schema::create('viajes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('tren_id', 50)->index();
+            $table->string('estados_replubica_catalogs_id', 50)->index();
             $table->decimal('carga_total_entregar', 8, 2);
             $table->decimal('carga_total_recoger', 8, 2);
             $table->string('jefe_de_sector_id', 50)->index();
-            $table->string('operador_principal');
+            $table->string('operador_principal_id');
             $table->date('fecha_comienzo');
             $table->date('fecha_carga');
             $table->date('fecha_salida_carga');
@@ -32,6 +33,14 @@ class CreateViajesTable extends Migration
             $table->foreign('jefe_de_sector_id')
                 ->references('id')
                 ->on('jefe_de_sectors');
+
+            $table->foreign('operador_principal_id')
+                ->references('id')
+                ->on('users');
+
+            $table->foreign('estados_replubica_catalogs_id')
+                ->references('id')
+                ->on('estados_replubica_catalogs');
 
         });
     }

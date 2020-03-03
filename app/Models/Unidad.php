@@ -13,7 +13,11 @@ class Unidad extends Model
         return $this->belongsTo('App\Models\Mantenimiento');
     }
 
-    public function gastosUnidad() {
+    public function gastos_unidad() {
         return $this->hasMany('App\Models\GastosUnidad');
+    }
+
+    public function tiro() {
+        return $this->belongsTo('App\Models\Tiro');
     }
 }

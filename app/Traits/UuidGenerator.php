@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 
 trait UuidGenerator
 {
+    protected $primaryKey = 'uuid';
+
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
     protected static function boot()
     {
         parent::boot();
@@ -20,11 +26,11 @@ trait UuidGenerator
 
     public function getIncrementing()
     {
-        return false;
+        return $this->incrementing;
     }
 
     public function getKeyType()
     {
-        return 'string';
+        return $this->keyType;
     }
 }
