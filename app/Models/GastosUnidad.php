@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\DefaultModelPropertiesChanger;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\UuidGenerator;
 
 class GastosUnidad extends Model
 {
-    use UuidGenerator;
+    use DefaultModelPropertiesChanger;
 
     public function unidad() {
         return $this->belongsTo('App\Models\Unidad');

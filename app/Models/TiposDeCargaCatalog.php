@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use App\Traits\DefaultModelPropertiesChanger;
-use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Model;
 
 class TiposDeCargaCatalog extends Model
 {
-    use UuidGenerator, DefaultModelPropertiesChanger;
+    use DefaultModelPropertiesChanger;
 
     public function detalle_carga()
     {

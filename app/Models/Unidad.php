@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\DefaultModelPropertiesChanger;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\UuidGenerator;
 
 class Unidad extends Model
 {
-    use UuidGenerator;
+    use DefaultModelPropertiesChanger;
 
     public function mantenimiento() {
         return $this->belongsTo('App\Models\Mantenimiento');

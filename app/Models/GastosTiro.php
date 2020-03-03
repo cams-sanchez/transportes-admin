@@ -3,12 +3,11 @@
 namespace App;
 
 use App\Traits\DefaultModelPropertiesChanger;
-use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Model;
 
 class GastosTiro extends Model
 {
-    use UuidGenerator, DefaultModelPropertiesChanger;
+    use DefaultModelPropertiesChanger;
 
     public function tiro()
     {

@@ -4,11 +4,10 @@ namespace App\Models;
 
 use App\Traits\DefaultModelPropertiesChanger;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\UuidGenerator;
 
 class Tren extends Model
 {
-    use UuidGenerator, DefaultModelPropertiesChanger;
+    use DefaultModelPropertiesChanger;
 
     public function temporada()
     {
