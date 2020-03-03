@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\CreatedUpdatedAtDateFormat;
+use App\Traits\DefaultModelPropertiesChanger;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +11,7 @@ use App\Traits\UuidGenerator;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, UuidGenerator, Notifiable, CreatedUpdatedAtDateFormat;
+    use HasApiTokens, UuidGenerator, Notifiable, DefaultModelPropertiesChanger;
 
     /**
      * The attributes that are mass assignable.

@@ -2,13 +2,13 @@
 
 namespace App;
 
-use App\Traits\CreatedUpdatedAtDateFormat;
+use App\Traits\DefaultModelPropertiesChanger;
 use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Model;
 
 class Transportista extends Model
 {
-    use UuidGenerator, CreatedUpdatedAtDateFormat;
+    use UuidGenerator, DefaultModelPropertiesChanger;
 
     public function user()
     {

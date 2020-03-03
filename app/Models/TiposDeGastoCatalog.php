@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\CreatedUpdatedAtDateFormat;
+use App\Traits\DefaultModelPropertiesChanger;
 use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Model;
 
 class TiposDeGastoCatalog extends Model
 {
-    use UuidGenerator, CreatedUpdatedAtDateFormat;
+    use UuidGenerator, DefaultModelPropertiesChanger;
 
     public function gasto_tiro()
     {
