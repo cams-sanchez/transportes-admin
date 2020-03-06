@@ -29,6 +29,16 @@ class Tiro extends Model
         return $this->belongsTo('App\Models\Establecimiento');
     }
 
+    public function operador_supervisor()
+    {
+        return $this->belongsTo(('App\Models\Operadores'));
+    }
+
+    public function operador()
+    {
+        return $this->belongsTo(('App\Models\Operadores'));
+    }
+
     public function detalles_carga()
     {
         return $this->hasOne('App\Models\DetallesDeCarga');
@@ -37,11 +47,6 @@ class Tiro extends Model
     public function factura()
     {
         return $this->hasOne('App\Models\Factura');
-    }
-
-    public function operador()
-    {
-        return $this->hasOne('App\Models\User');
     }
 
     public function gastos()

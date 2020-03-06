@@ -54,9 +54,9 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Viaje');
     }
 
-    public function tiro()
+    public function operador()
     {
-        return $this->belongsTo('App\Models\Tiro');
+        return $this->belongsTo('App\Models\Operadores');
     }
 
     public function tipo_usuario()

@@ -3,20 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="710a9238-88a5-40c7-b700-6394ef1644d2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Tiro.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Tiro.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195549_create_trens_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195549_create_trens_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Viaje.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Viaje.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195601_create_viajes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195601_create_viajes_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195628_create_jefe_de_sectors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195600_create_jefe_de_sectors_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195651_create_tiros_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195651_create_tiros_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195710_create_establecimientos_catalogs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195645_create_establecimientos_catalogs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195727_create_unidads_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195640_create_unidads_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195735_create_gastos_unidads_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195735_create_gastos_unidads_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195805_create_evidencias_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195805_create_evidencias_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195817_create_incidentes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195817_create_incidentes_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_02_195841_create_facturas_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195841_create_facturas_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_03_185604_create_mantenimientos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_03_185604_create_mantenimientos_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_03_203622_create_tipos_de_incidencia_catalogs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_195804_create_tipos_de_incidencia_catalogs_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/vendor/facade/ignition" />
@@ -153,20 +144,63 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/docs" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.spelling" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\rafae\development\code\transportes-api\docs" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\rafae\development\code\transportes-api\app\Models" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\rafae\development\code\transportes-api\docs" />
+    </key>
   </component>
-  <component name="RunManager">
-    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
-      <TestRunner scope="XML" />
+  <component name="RunManager" selected="PHPUnit.DefaultModelPropertiesChangerTest">
+    <configuration name="CreatedUpdatedAtDateFormatTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\CreatedUpdatedAtDateFormatTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/DefaultModelPropertiesChangerTest.php" scope="Class" />
       <method v="2" />
     </configuration>
+    <configuration name="DefaultModelPropertiesChangerTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\DefaultModelPropertiesChangerTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/DefaultModelPropertiesChangerTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ExampleTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\ExampleTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/ExampleTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unit" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/tests/Unit" />
+      <method v="2" />
+    </configuration>
+    <configuration name="UuidGeneratorTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\UuidGeneratorTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/UuidGeneratorTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP 7.4" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="PHPUnit.phpunit.xml" />
+      <item itemvalue="PHPUnit.ExampleTest" />
+      <item itemvalue="PHPUnit.CreatedUpdatedAtDateFormatTest" />
+      <item itemvalue="PHPUnit.Unit" />
+      <item itemvalue="PHPUnit.DefaultModelPropertiesChangerTest" />
+      <item itemvalue="PHPUnit.UuidGeneratorTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.DefaultModelPropertiesChangerTest" />
+        <item itemvalue="PHPUnit.UuidGeneratorTest" />
+        <item itemvalue="PHPUnit.CreatedUpdatedAtDateFormatTest" />
+        <item itemvalue="PHPUnit.Unit" />
+        <item itemvalue="PHPUnit.ExampleTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -179,7 +213,9 @@
       <option name="presentableId" value="Default" />
       <updated>1580668535144</updated>
       <workItem from="1580668540476" duration="7680000" />
-      <workItem from="1580751865444" duration="14931000" />
+      <workItem from="1580751865444" duration="17234000" />
+      <workItem from="1582217519101" duration="189000" />
+      <workItem from="1583190781441" duration="26391000" />
     </task>
     <servers />
   </component>
@@ -187,18 +223,70 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="523" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1580754678577">
+    <state x="356" y="67" key="#CLI_Interpreters" timestamp="1583209061962">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="523" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1580754678577" />
-    <state x="508" y="212" key="NewPhpClassDialog" timestamp="1580753983235">
+    <state x="356" y="67" key="#CLI_Interpreters/0.0.1536.824@0.0.1536.824" timestamp="1583209061962" />
+    <state x="430" y="39" key="#CreatedUpdatedAtDateFormatTest" timestamp="1583209955884">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="508" y="212" key="NewPhpClassDialog/0.0.1536.824@0.0.1536.824" timestamp="1580753983235" />
+    <state x="430" y="39" key="#CreatedUpdatedAtDateFormatTest/0.0.1536.824@0.0.1536.824" timestamp="1583209955884" />
+    <state x="494" y="0" key="#PHP" timestamp="1583209066344">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="494" y="0" key="#PHP/0.0.1536.824@0.0.1536.824" timestamp="1583209066344" />
+    <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583209443908">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1583209443908" />
+    <state x="523" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583209933042">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="523" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1583209933042" />
+    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1583212598345">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1583212598345" />
+    <state x="430" y="70" width="690" height="684" key="#phpunit.xml" timestamp="1583209076233">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="430" y="70" width="690" height="684" key="#phpunit.xml/0.0.1536.824@0.0.1536.824" timestamp="1583209076233" />
+    <state x="548" y="168" key="FileChooserDialogImpl" timestamp="1583209434382">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="548" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583209434382" />
+    <state width="1493" height="190" key="GridCell.Tab.0.bottom" timestamp="1583517909046">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="190" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583517909045" />
+    <state width="1493" height="190" key="GridCell.Tab.0.center" timestamp="1583517909044">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="190" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1583517909044" />
+    <state width="1493" height="190" key="GridCell.Tab.0.left" timestamp="1583517909043">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="190" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1583517909043" />
+    <state width="1493" height="190" key="GridCell.Tab.0.right" timestamp="1583517909044">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="190" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1583517909044" />
+    <state x="508" y="212" key="NewPhpClassDialog" timestamp="1583193867289">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="508" y="212" key="NewPhpClassDialog/0.0.1536.824@0.0.1536.824" timestamp="1583193867289" />
+    <state x="277" y="56" key="SettingsEditor" timestamp="1583521607428">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1583521607428" />
     <state x="444" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1580668544201">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="444" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1580668544201" />
+    <state x="453" y="0" width="759" height="824" key="find.popup" timestamp="1583520544112">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="453" y="0" width="759" height="824" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1583520544112" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580668996575">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
