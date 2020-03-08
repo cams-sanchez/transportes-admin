@@ -22,7 +22,7 @@ class CompanyTableSeeder extends Seeder
         $company->razon_social = 'PysisTI';
         $company->rfc = 'GAFR7709277J2';
         $company->tipo_fiscal = 'fisica';
-        $company->status = 'ACTIVE';
+        $company->status = 'ACTIVO';
         $company->contacts = '{casa: 5557898989, cel:5512345678, email:info@pysisti.com}';
         $company->calle= 'Alfonso Herrera';
         $company->num_ext = '4567';

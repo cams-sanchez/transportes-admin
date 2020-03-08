@@ -31,11 +31,15 @@ class CreateTransportistasTable extends Migration
             $table->string('fiscal_num_ext',20);
             $table->string('fiscal_num_int', 20);
             $table->string('fiscal_cp', 6)->index();
-            $table->string('fiscal_estado', 50);
+            $table->string('fiscal_estados_replubica_catalogs_id', 50);
             $table->string('fiscal_municipio', 100);
             $table->timestamps();
 
             $table->foreign('estados_replubica_catalogs_id')
+                ->references('id')
+                ->on('estados_replubica_catalogs');
+
+            $table->foreign('fiscal_estados_replubica_catalogs_id')
                 ->references('id')
                 ->on('estados_replubica_catalogs');
         });

@@ -21,7 +21,7 @@ class ClienteTableSeeder extends Seeder
         $cliente->razon_social = 'Ferrero';
         $cliente->rfc = 'FERR0978657YU';
         $cliente->tipo_fiscal = 'fisica';
-        $cliente->status = 'ACTIVE';
+        $cliente->status = 'ACTIVO';
         $cliente->contacts = '';
         $cliente->calle= '';
         $cliente->num_ext = '';
