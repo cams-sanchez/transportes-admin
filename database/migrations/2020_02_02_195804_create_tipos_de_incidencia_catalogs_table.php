@@ -15,9 +15,10 @@ class CreateTiposDeIncidenciaCatalogsTable extends Migration
     {
         Schema::create('tipos_de_incidencia_catalogs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('nombre', 200);
+            $table->string('nombre', 200)->index();
             $table->mediumText('descripcion');
             $table->mediumText('como_resolver');
+            $table->string('status', 30)->index();
             $table->timestamps();
         });
     }

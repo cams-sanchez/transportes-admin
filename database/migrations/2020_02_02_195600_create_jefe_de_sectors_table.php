@@ -15,10 +15,11 @@ class CreateJefeDeSectorsTable extends Migration
     {
         Schema::create('jefe_de_sectors', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('nombre', 200);
-            $table->string('email', 200);
+            $table->string('nombre', 200)->index();
+            $table->string('email', 200)->index();
             $table->mediumText('contactos_telefonicos');
             $table->string('direccion');
+            $table->string('status', 50)->index();
             $table->timestamps();
         });
     }

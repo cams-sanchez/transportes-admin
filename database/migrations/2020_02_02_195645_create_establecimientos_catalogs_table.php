@@ -15,18 +15,24 @@ class CreateEstablecimientosCatalogsTable extends Migration
     {
         Schema::create('establecimientos_catalogs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('tipo', 100);
-            $table->string('nombre',200);
+            $table->string('tipo', 100)->index();
+            $table->string('nombre',200)->index();
             $table->string('calle', 200);
             $table->string('num_ext',20);
             $table->string('num_int', 20);
-            $table->string('cp', 6);
-            $table->string('estado', 50);
+            $table->string('cp', 6)->index();
+            $table->string('estados_replubica_catalogs_id', 50)->index();
             $table->string('municipio', 100);
-            $table->mediumText('ubicacion_gps');
+            $table->decimal('gps_location_lat', 10, 7)->index();
+            $table->decimal('gps_location_long', 10, 7)->index();
             $table->string('encargado_recibir', 200);
             $table->mediumText('contacto');
+            $table->string('status', 50)->index();
             $table->timestamps();
+
+            $table->foreign('estados_replubica_catalogs_id')
+                ->references('id')
+                ->on('estados_replubica_catalogs');
         });
     }
 

@@ -19,6 +19,7 @@ class CreateTiposDeMantenimientoCatalogsTable extends Migration
             $table->mediumText('descripccion');
             $table->mediumText('cambios_a_realizar');
             $table->string('realizarse_al_kilometraje', 20);
+            $table->string('status', 50)->index();
             $table->timestamps();
         });
     }

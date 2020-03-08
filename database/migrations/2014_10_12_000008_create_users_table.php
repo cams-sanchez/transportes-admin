@@ -18,20 +18,19 @@ class CreateUsersTable extends Migration
             $table->string('company_id', 50)->index();
             $table->string('transportista_id', 50)->index();
             $table->string('tipo_usuarios_id', 50)->index();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name')->index();
+            $table->string('email')->unique()->index();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('status', 50);
+            $table->string('status', 50)->index();
             $table->mediumText('contacts');
-            $table->string('user_type');
-            $table->string('user_nick', 100);
+            $table->string('user_nick', 100)->index();
             $table->string('calle', 200);
             $table->string('num_ext',20);
             $table->string('num_int', 20);
-            $table->string('cp', 6);
-            $table->string('estado', 50);
+            $table->string('cp', 6)->index();
+            $table->string('estados_replubica_catalogs_id', 50)->index();
             $table->string('municipio', 100);
             $table->timestamps();
 
@@ -46,6 +45,10 @@ class CreateUsersTable extends Migration
             $table->foreign('tipo_usuarios_id')
                 ->references('id')
                 ->on('tipo_usuarios');
+
+            $table->foreign('estados_replubica_catalogs_id')
+                ->references('id')
+                ->on('estados_replubica_catalogs');
         });
     }
 

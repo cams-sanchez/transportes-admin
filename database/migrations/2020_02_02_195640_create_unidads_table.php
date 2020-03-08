@@ -15,13 +15,14 @@ class CreateUnidadsTable extends Migration
     {
         Schema::create('unidads', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('nombre', 100);
-            $table->string('tipo', 100);
-            $table->string('marca',100);
+            $table->string('nombre', 100)->index();
+            $table->string('tipo', 100)->index();
+            $table->string('marca',100)->index();
             $table->string('tonelaje',20);
             $table->string('kilometraje', 20);
             $table->mediumText('otros_detalles');
             $table->string('factura', 200);
+            $table->string('status', 50)->index();
             $table->timestamps();
         });
     }

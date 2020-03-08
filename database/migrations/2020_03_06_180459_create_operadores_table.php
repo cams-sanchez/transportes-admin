@@ -15,19 +15,27 @@ class CreateOperadoresTable extends Migration
     {
         Schema::create('operadores', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('oprerador_id');
+            $table->string('operador_id')->index();
             $table->string('viaje_id', 50)->index()->nullable(true);
             $table->string('tiro_id', 50)->index()->nullable(true);
             $table->boolean('is_supervisor')->default(false);
-            $table->boolean('is_regular_driver')->default(true);
             $table->boolean('operator_change')->default(false);
             $table->text('reason_of_change');
-            $table->string('status', 80);
+            $table->string('status', 80)->index();
             $table->timestamps();
 
             $table->foreign('operador_id')
                 ->references('id')
                 ->on('users');
+
+            $table->foreign('viaje_id')
+                ->references('id')
+                ->on('viajes');
+
+            $table->foreign('tiro_id')
+                ->references('id')
+                ->on('tiros');
+
         });
     }
 

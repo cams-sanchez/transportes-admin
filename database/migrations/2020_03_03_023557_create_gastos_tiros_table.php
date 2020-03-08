@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;
 
 class CreateGastosTirosTable extends Migration
 {
@@ -17,10 +18,11 @@ class CreateGastosTirosTable extends Migration
             $table->uuid('id')->primary();
             $table->string('tiro_id', 50)->index();
             $table->string('tipos_de_gasto_catalogs_id', 50)->index();
-            $table->date('fecha_gasto');
+            $table->dateTime('fecha_gasto')->default(Carbon::now())->index();
             $table->decimal('cantidad', 8, 2);
             $table->decimal('total', 8, 2);
-            $table->text('comentarios');
+            $table->string('comentarios', 200);
+            $table->string('status', 30)->index();
             $table->timestamps();
 
             $table->foreign('tiro_id')

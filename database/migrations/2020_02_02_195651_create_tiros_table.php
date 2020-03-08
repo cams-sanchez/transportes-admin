@@ -21,10 +21,10 @@ class CreateTirosTable extends Migration
             $table->string('tipo_carga_id', 50)->index();
             $table->decimal('cantidad', 8, 2);
             $table->string('delivery', 100)->index();
-            $table->string('solicitud', 100);
-            $table->string('numero_de_pedido', 100);
+            $table->string('solicitud', 100)->index();
+            $table->string('numero_de_pedido', 100)->index();
             $table->mediumText('notas');
-            $table->string('status', 30);
+            $table->string('status', 30)->index();
             $table->timestamps();
 
             $table->foreign('viaje_id')

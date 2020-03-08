@@ -16,20 +16,24 @@ class CreateRepresentanteClientesTable extends Migration
         Schema::create('representante_clientes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('cliente_id', 50)->index();
-            $table->string('nombre', 200);
-            $table->string('status', 50);
+            $table->string('nombre', 200)->index();
+            $table->string('status', 50)->index();
             $table->mediumText('contacts');
             $table->string('calle', 200);
             $table->string('num_ext',20);
             $table->string('num_int', 20);
-            $table->string('cp', 6);
-            $table->string('estado', 50);
+            $table->string('cp', 6)->index();
+            $table->string('estados_replubica_catalogs_id', 50)->index();
             $table->string('municipio', 100);
             $table->timestamps();
 
             $table->foreign('cliente_id')
                 ->references('id')
                 ->on('clientes');
+
+            $table->foreign('estados_replubica_catalogs_id')
+                ->references('id')
+                ->on('estados_replubica_catalogs');
         });
     }
 

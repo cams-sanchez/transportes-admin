@@ -14,8 +14,16 @@ class CreateDetallesDeCargasTable extends Migration
     public function up()
     {
         Schema::create('detalles_de_cargas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
+            $table->string('viaje_id', 50)->index();
+            $table->boolean('is_to_deliver')->default(true)->index();
+            $table->double('cantidad', 6, 2);
+            $table->string('status',50)->index();
             $table->timestamps();
+
+            $table->foreign('viaje_id')
+                ->references('id')
+                ->on('viajes');
         });
     }
 

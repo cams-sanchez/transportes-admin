@@ -15,17 +15,17 @@ class CreateTemporadasTable extends Migration
     {
         Schema::create('temporadas', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('representante_clientes_id', 50)->index();
-            $table->string('nombre', 200);
+            $table->string('autorizado_por', 50)->index();
+            $table->string('nombre', 200)->index();
             $table->string('descripcion', 200);
-            $table->date('fecha_inicio_estipulada');
-            $table->date('fecha_inicio_real');
-            $table->date('fecha_fin_estipulada');
-            $table->date('fecha_fin_real');
-            $table->unsignedBigInteger('autorizado_por');
+            $table->date('fecha_inicio_estipulada')->index();
+            $table->date('fecha_inicio_real')->index();
+            $table->date('fecha_fin_estipulada')->index();
+            $table->date('fecha_fin_real')->index();
+            $table->string('status', 50)->index();
             $table->timestamps();
 
-            $table->foreign('representante_clientes_id')
+            $table->foreign('autorizado_por')
                 ->references('id')
                 ->on('representante_clientes');
 

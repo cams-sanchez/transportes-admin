@@ -17,12 +17,11 @@ class CreateViajesTable extends Migration
             $table->uuid('id')->primary();
             $table->string('tren_id', 50)->index();
             $table->string('estados_replubica_catalogs_id', 50)->index();
-            $table->decimal('carga_total_entregar', 8, 2);
-            $table->decimal('carga_total_recoger', 8, 2);
             $table->string('jefe_de_sector_id', 50)->index();
-            $table->date('fecha_comienzo');
-            $table->date('fecha_carga');
-            $table->date('fecha_salida_carga');
+            $table->date('fecha_comienzo')->index();
+            $table->date('fecha_carga')->index();
+            $table->date('fecha_salida_carga')->index();
+            $table->string('status', 50)->index();
             $table->timestamps();
 
             $table->foreign('tren_id')

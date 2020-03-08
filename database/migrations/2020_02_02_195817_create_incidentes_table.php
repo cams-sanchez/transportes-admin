@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;
 
 class CreateIncidentesTable extends Migration
 {
@@ -17,10 +18,10 @@ class CreateIncidentesTable extends Migration
             $table->uuid('id')->primary();
             $table->string('tiro_id', 50)->index();
             $table->string('tipo_incidencia_id', 50)->index();
-            $table->dateTime('fecha_comienzo');
-            $table->dateTime('fecha_termino');
-            $table->string('status');
+            $table->dateTime('fecha_comienzo')->default(Carbon::now())->index();
+            $table->dateTime('fecha_termino')->default(Carbon::now())->index();
             $table->mediumText('detalles');
+            $table->string('status', 30)->index();
             $table->timestamps();
 
             $table->foreign('tiro_id')
