@@ -16,6 +16,7 @@ class CreateTiposDeCargaCatalogsTable extends Migration
         Schema::create('tipos_de_carga_catalogs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nombre', 100)->index();
+            $table->string('unidadMetrica', 50)->index()->nullable(true);
             $table->string('descripcion', 200);
             $table->string('status', 50)->index();
             $table->timestamps();

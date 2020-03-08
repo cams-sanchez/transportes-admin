@@ -18,10 +18,10 @@ class CreateTemporadasTable extends Migration
             $table->string('autorizado_por', 50)->index();
             $table->string('nombre', 200)->index();
             $table->string('descripcion', 200);
-            $table->date('fecha_inicio_estipulada')->index();
-            $table->date('fecha_inicio_real')->index();
-            $table->date('fecha_fin_estipulada')->index();
-            $table->date('fecha_fin_real')->index();
+            $table->date('fecha_inicio_estipulada')->index()->nullable(true);
+            $table->date('fecha_inicio_real')->index()->nullable(true);
+            $table->date('fecha_fin_estipulada')->index()->nullable(true);
+            $table->date('fecha_fin_real')->index()->nullable(true);
             $table->string('status', 50)->index();
             $table->timestamps();
 

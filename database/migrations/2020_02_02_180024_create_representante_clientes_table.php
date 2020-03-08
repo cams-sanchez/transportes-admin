@@ -23,7 +23,7 @@ class CreateRepresentanteClientesTable extends Migration
             $table->string('num_ext',20);
             $table->string('num_int', 20);
             $table->string('cp', 6)->index();
-            $table->string('estados_replubica_catalogs_id', 50)->index();
+            $table->string('estados_replubica_catalogs_id', 50)->index()->nullable(true);
             $table->string('municipio', 100);
             $table->timestamps();
 
