@@ -23,7 +23,7 @@ class CreateDetallesDeCargasTable extends Migration
 
             $table->foreign('tiro_id')
                 ->references('id')
-                ->on('tiro');
+                ->on('tiros');
         });
     }
 

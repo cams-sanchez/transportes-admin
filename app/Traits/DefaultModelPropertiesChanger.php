@@ -3,32 +3,17 @@
 
 namespace App\Traits;
 
-
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\UuidGenerator;
+use Ramsey\Uuid\Uuid;
 
 trait DefaultModelPropertiesChanger
 {
-    use UuidGenerator;
-
-    /** @var $dateFormat string  */
-    protected $dateFormat = 'Y-m-d H:i:s';
-
-    /** @var $primaryKey string  */
-    protected $primaryKey = 'uuid';
-
-    /** @var $keyType string  */
-    protected $keyType = 'string';
-
-    /** @var $incrementing bool  */
-    public $incrementing = false;
-
     protected static function boot()
     {
         parent::boot();
         static::creating(function (Model $model) {
             if (! $model->getKey()) {
-                $model->{$model->getKeyName()} =  $this->getUuid();
+                $model->{$model->getKeyName()} =  Uuid::uuid4();
             }
         });
     }
@@ -38,7 +23,7 @@ trait DefaultModelPropertiesChanger
      */
     public function getIncrementing()
     {
-        return $this->incrementing;
+        return false;
     }
 
     /**
@@ -46,7 +31,7 @@ trait DefaultModelPropertiesChanger
      */
     public function getKeyType()
     {
-        return $this->keyType;
+        return 'string';
     }
 
     /**
@@ -54,7 +39,7 @@ trait DefaultModelPropertiesChanger
      */
     public function getDateFormat()
     {
-        return $this->dateFormat;
+        return 'Y-m-d H:i:s';
     }
 
     /**
@@ -62,6 +47,6 @@ trait DefaultModelPropertiesChanger
      */
     public function getKeyName(): string
     {
-        return $this->primaryKey;
+        return 'id';
     }
 }
