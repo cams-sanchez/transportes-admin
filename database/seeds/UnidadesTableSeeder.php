@@ -13,6 +13,7 @@ class UnidadesTableSeeder extends Seeder
     public function run()
     {
         $unidad = new Unidad();
+        $unidad2 = new Unidad();
 
         $unidad->nombre = 'Unidad Torton';
         $unidad->tipo = 'Torton';
@@ -21,8 +22,19 @@ class UnidadesTableSeeder extends Seeder
         $unidad->kilometraje = '100';
         $unidad->otros_detalles = 'Se usa para cargas grandes';
         $unidad->url_factura = '';
-        $unidad->status = 'ACTIVO';
+        $unidad->status = 'DISPONIBLE';
 
         $unidad->save();
+
+        $unidad2->nombre = 'Unidad Tornado';
+        $unidad2->tipo = 'Tornado';
+        $unidad2->marca = 'Ford';
+        $unidad2->tonelaje = '1';
+        $unidad2->kilometraje = '105000';
+        $unidad2->otros_detalles = 'Se usa para cargas pequeñas';
+        $unidad2->url_factura = '';
+        $unidad2->status = 'DISPONIBLE';
+
+        $unidad2->save();
     }
 }

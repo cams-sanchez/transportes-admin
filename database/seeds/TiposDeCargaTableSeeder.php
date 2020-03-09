@@ -20,7 +20,7 @@ class TiposDeCargaTableSeeder extends Seeder
                 'status' => 'ACTIVO'
             ],
             [
-                'nombre' => 'lote',
+                'nombre' => 'Lote',
                 'unidadMetrica' => 'tonelada',
                 'descripcion' => 'Carga de lote de cajas de contenido varios',
                 'status' => 'ACTIVO'

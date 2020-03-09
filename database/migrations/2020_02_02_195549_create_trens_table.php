@@ -16,10 +16,11 @@ class CreateTrensTable extends Migration
         Schema::create('trens', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('temporada_id', 50)->index();
+            $table->string('nombre', 150)->index();
             $table->string('zona', 50)->index();
             $table->string('descripcion',200);
-            $table->date('fecha_comienzo')->index();
-            $table->date('fecha_fin')->index();
+            $table->date('fecha_comienzo')->index()->nullable(true);
+            $table->date('fecha_fin')->index()->nullable(true);
             $table->string('status', 50)->index();
             $table->timestamps();
 
