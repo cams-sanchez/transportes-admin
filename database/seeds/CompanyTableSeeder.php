@@ -23,8 +23,12 @@ class CompanyTableSeeder extends Seeder
         $company->rfc = 'GAFR7709277J2';
         $company->tipo_fiscal = 'fisica';
         $company->status = 'ACTIVO';
-        $company->contacts = '{casa: 5557898989, cel:5512345678, email:info@pysisti.com}';
-        $company->calle= 'Alfonso Herrera';
+        $company->contacts = json_encode(
+            [
+                'casa' => '5557898989', 'cel' => '5512345678',
+                'email' => 'info@pysisti.com'
+            ]);
+        $company->calle = 'Alfonso Herrera';
         $company->num_ext = '4567';
         $company->num_int = '';
         $company->cp = '98789';

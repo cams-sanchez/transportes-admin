@@ -13,4 +13,9 @@ class EstablecimientosCatalog extends Model
     {
         return $this->hasOne('App\Models\Tiro');
     }
+
+    public function tipo_establecimiento()
+    {
+        return $this->hasOne('App\Models\TipoDeEstablecimiento');
+    }
 }

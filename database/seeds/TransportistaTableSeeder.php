@@ -23,8 +23,13 @@ class TransportistaTableSeeder extends Seeder
         $transportista->rfc = 'CAMS089809TY6';
         $transportista->tipo_fiscal = 'fisica';
         $transportista->status = 'ACTIVO';
-        $transportista->contacts = '{casa: 5557898989, cel:5512345678, email:transportes.cams.sanchez@gmail.com}';
-        $transportista->calle= 'Domicilio Conocido';
+        $transportista->contacts = json_encode(
+            [
+                'casa' => '5557898989',
+                'cel' => '5512345678',
+                'email' => 'transportes.cams.sanchez@gmail.com'
+            ]);
+        $transportista->calle = 'Domicilio Conocido';
         $transportista->num_ext = '45673';
         $transportista->num_int = '';
         $transportista->cp = '98789';

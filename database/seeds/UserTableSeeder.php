@@ -32,7 +32,7 @@ class UserTableSeeder extends Seeder
         $user->email_verified_at = null;
         $user->password = bcrypt('1234');;
         $user->status = 'ACTIVO';
-        $user->contacts = '{casa: 5557898989, cel:5512345678, email:info@pysisti.com}';
+        $user->contacts = json_encode(['casa'=> '5557898989', 'cel'=>'5512345678', 'email'=>'info@pysisti.com']);
         $user->user_nick = 'rufus';
         $user->calle = 'calle 2';
         $user->num_ext = '234';

@@ -15,7 +15,7 @@ class CreateEstablecimientosCatalogsTable extends Migration
     {
         Schema::create('establecimientos_catalogs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('tipo', 100)->index();
+            $table->string('tipo_id', 100)->index();
             $table->string('nombre',200)->index();
             $table->string('calle', 200);
             $table->string('num_ext',20);
@@ -33,6 +33,10 @@ class CreateEstablecimientosCatalogsTable extends Migration
             $table->foreign('estados_replubica_catalogs_id')
                 ->references('id')
                 ->on('estados_replubica_catalogs');
+
+            $table->foreign('tipo_id')
+                ->references('id')
+                ->on('tipos_de_establecimientos');
         });
     }
 

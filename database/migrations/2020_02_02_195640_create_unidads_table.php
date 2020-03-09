@@ -21,7 +21,7 @@ class CreateUnidadsTable extends Migration
             $table->string('tonelaje',20);
             $table->string('kilometraje', 20);
             $table->mediumText('otros_detalles');
-            $table->string('factura', 200);
+            $table->string('url_factura', 200);
             $table->string('status', 50)->index();
             $table->timestamps();
         });
