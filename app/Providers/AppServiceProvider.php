@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Passport::ignoreMigrations();
-        Passport::useClientModel('App\Passport\Client');
+        Passport::useClientModel('App\Models\Passport\Client');
     }
 
     /**
@@ -35,5 +35,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Passport::routes();
+
+        Passport::tokensExpireIn(now()->addDays(15));
+        Passport::refreshTokensExpireIn(now()->addDays(30));
     }
 }
