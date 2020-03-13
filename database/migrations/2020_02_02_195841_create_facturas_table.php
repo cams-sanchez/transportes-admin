@@ -26,7 +26,7 @@ class CreateFacturasTable extends Migration
             $table->decimal('subtotal', 8, 2);
             $table->decimal('descuento', 8, 2);
             $table->string('condiciones_de_pago', 200);
-            $table->mediumText('certificado')->index();
+            $table->mediumText('certificado');
             $table->string('regimen_fiscal', 200);
             $table->string('emisor', 200);
             $table->string('receptor', 200);
