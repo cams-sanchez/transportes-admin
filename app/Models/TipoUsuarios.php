@@ -9,8 +9,8 @@ class TipoUsuarios extends Model
 {
     use DefaultModelPropertiesChanger;
 
-    public function usuario()
+    public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->hasOne('App\Models\User');
     }
 }

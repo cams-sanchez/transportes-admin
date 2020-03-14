@@ -29,4 +29,8 @@ class EstadosReplubicaCatalog extends Model
         return $this->belongsTo('App\Models\Viaje');
     }
 
+    public function user()
+    {
+        return $this->hasOne('App\Models\User');
+    }
 }

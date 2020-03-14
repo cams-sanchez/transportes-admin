@@ -59,12 +59,17 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Operadores');
     }
 
-    public function tipo_usuario()
+    public function tipoUsuario()
     {
-        return $this->hasOne('App\Models\TipoUsuarios');
+        return $this->belongsTo('App\Models\TipoUsuarios');
     }
 
-    public function equipo_celular()
+    public function estado()
+    {
+        return $this->belongsTo('App\Models\EstadosReplubicaCatalog');
+    }
+
+    public function equipoCelular()
     {
         return $this->hasOne('App\Models\EquipoCelular');
     }
