@@ -17,7 +17,7 @@ class EquipoCelularTableSeeder extends Seeder
 
         $operador = User::where('name', '=', 'Rafael Galvan')->first();
 
-        $equipoCelular->usuario_id = $operador->id;
+        $equipoCelular->user_id = $operador->id;
         $equipoCelular->marca = 'Samsung';
         $equipoCelular->modelo = 'A50';
         $equipoCelular->numero = '5523124565';
@@ -25,5 +25,7 @@ class EquipoCelularTableSeeder extends Seeder
         $equipoCelular->url_factura = '';
         $equipoCelular->url_contrato = '';
         $equipoCelular->status = 'ACTIVO';
+
+        $equipoCelular->save();
     }
 }

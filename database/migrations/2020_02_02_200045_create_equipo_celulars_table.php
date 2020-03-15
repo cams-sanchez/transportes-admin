@@ -15,7 +15,7 @@ class CreateEquipoCelularsTable extends Migration
     {
         Schema::create('equipo_celulars', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('usuario_id', 50)->index();
+            $table->string('user_id', 50)->index();
             $table->string('marca', 100)->index();
             $table->string('modelo', 100)->index();
             $table->string('numero', 12)->index();
@@ -25,7 +25,7 @@ class CreateEquipoCelularsTable extends Migration
             $table->string('status', 30)->index();
             $table->timestamps();
 
-            $table->foreign('usuario_id')
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
         });

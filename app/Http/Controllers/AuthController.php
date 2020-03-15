@@ -30,13 +30,32 @@ class AuthController extends Controller
             $tokenResult->token->expires_at = Carbon::now()->addMinute(180);
             $tokenResult->token->save();
 
+            //TODO We may need to create a decorator or something else to get all this info to make this
+            // method lighter BTW the phones are an array we need to iterate them
             $responseArray = [
                 'success' => true,
-                'data' => [
-                    'foundUserInfo' => $user,
-                    'token_type' => 'Bearer',
-                    'token' => $tokenResult->accessToken
-                ]
+                'foundUserInfo' => [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'user_nick' => $user->user_nick,
+                    'status' => $user->status,
+                    'contacts' => json_decode($user->contacts),
+                    'permissions' => [],
+                    'phoneGear' => $user->equipoCelular,
+                    'tipo_usuario' => $user->tipoUsuario,
+                    'company' => $user->company->nombre,
+                    'transportista' => $user->transportista->nombre,
+                    'direccion' => [
+                        'calle' => $user->calle,
+                        'num_ext' => $user->num_ext,
+                        'num_int' => $user->num_int,
+                        'cp' => $user->cp,
+                        'estado' => $user->estado,
+                        'municipio' => $user->municipio,
+                    ],
+                ],
+                'token_type' => 'Bearer',
+                'token' => $tokenResult->accessToken
             ];
 
             return response()->json($responseArray);
@@ -61,25 +80,29 @@ class AuthController extends Controller
 
         $user = User::where('id', '=', $tokenUserInfo->id)->first();
 
-        return response()->json([
-            'name' => $user->name,
-            'email' => $user->email,
-            'user_nick' => $user->user_nick,
-            'status' => $user->status,
-            'contacts' => json_decode($user->contacts),
-            'tipo_usuario' => $user->tipoUsuario,
-            'company' => $user->company->nombre,
-            'transportista' => $user->transportista->nombre,
-            'direccion' => [
-                'calle' => $user->calle,
-                'num_ext' => $user->num_ext,
-                'num_int' => $user->num_int,
-                'cp' => $user->cp,
-                'estado' => $user->estado,
-                'municipio' => $user->municipio,
-            ],
-
-
-        ]);
+        return response()->json(
+            [
+                'success' => true,
+                'foundUserInfo' => [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'user_nick' => $user->user_nick,
+                    'status' => $user->status,
+                    'contacts' => json_decode($user->contacts),
+                    'permissions' => [],
+                    'phoneGear' => $user->equipoCelular,
+                    'tipo_usuario' => $user->tipoUsuario,
+                    'company' => $user->company->nombre,
+                    'transportista' => $user->transportista->nombre,
+                    'direccion' => [
+                        'calle' => $user->calle,
+                        'num_ext' => $user->num_ext,
+                        'num_int' => $user->num_int,
+                        'cp' => $user->cp,
+                        'estado' => $user->estado,
+                        'municipio' => $user->municipio,
+                    ],
+                ]
+            ]);
     }
 }

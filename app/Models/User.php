@@ -71,6 +71,6 @@ class User extends Authenticatable
 
     public function equipoCelular()
     {
-        return $this->hasOne('App\Models\EquipoCelular');
+        return $this->hasMany('App\Models\EquipoCelular');
     }
 }
