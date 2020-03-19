@@ -3,10 +3,8 @@
 
 namespace App\Decorators;
 
-
 use App\Models\User;
 use Laravel\Passport\PersonalAccessTokenResult;
-use PhpParser\Node\Expr\Array_;
 
 /**
  * Class AuthControllerDecorator

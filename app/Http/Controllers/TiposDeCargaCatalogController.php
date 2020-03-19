@@ -2,84 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\TiposDeCargaCatalog;
+use App\Decorators\TiposDeCargaCatalogControllerDecorator;
+use App\Repositories\TiposDeCargaRepository;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
+/**
+ * Class TiposDeCargaCatalogController
+ * @package App\Http\Controllers
+ */
 class TiposDeCargaCatalogController extends Controller
 {
+
+    /** @var TiposDeCargaRepository $tiposDeCargaRepository */
+    protected $tiposDeCargaRepository;
+
+    /** @var TiposDeCargaCatalogControllerDecorator $decorator*/
+    protected $decorator;
+
+    /**
+     * TiposDeCargaCatalogController constructor.
+     * @param TiposDeCargaRepository $tiposDeCargaRepository
+     * @param TiposDeCargaCatalogControllerDecorator $decorator
+     */
+    public function __construct(
+        TiposDeCargaRepository $tiposDeCargaRepository,
+        TiposDeCargaCatalogControllerDecorator $decorator)
+    {
+        $this->tiposDeCargaRepository = $tiposDeCargaRepository;
+        $this->decorator = $decorator;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index()
     {
-        //
+        $tiposDeCarga = $this->tiposDeCargaRepository->getAllTiposDeCarga();
+
+        return response()->json($this->decorator->decorateAllTiposDeCargaResponse($tiposDeCarga));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\TiposDeCargaCatalog  $tiposDeCargaCatalog
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TiposDeCargaCatalog $tiposDeCargaCatalog)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\TiposDeCargaCatalog  $tiposDeCargaCatalog
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TiposDeCargaCatalog $tiposDeCargaCatalog)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TiposDeCargaCatalog  $tiposDeCargaCatalog
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, TiposDeCargaCatalog $tiposDeCargaCatalog)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\TiposDeCargaCatalog  $tiposDeCargaCatalog
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TiposDeCargaCatalog $tiposDeCargaCatalog)
-    {
-        //
-    }
 }

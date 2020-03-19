@@ -80,5 +80,11 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api/users/')
             ->namespace($this->namespace)
             ->group(base_path('routes/Login/LoginRoutes.php'));
+
+        Route::prefix('api/catalogs/tiposdecarga')
+            ->middleware('auth:api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/Catalogs/TiposDeCargaRoutes.php'));
+
     }
 }
