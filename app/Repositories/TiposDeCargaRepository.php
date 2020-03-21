@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 use App\Helpers\JsonHelper;
 use App\Models\TiposDeCargaCatalog;
+use App\Constants\StatusConstants;
 
 /**
  * Class TiposDeCargaRepository
@@ -15,11 +16,15 @@ class TiposDeCargaRepository
     /** @var TiposDeCargaCatalog $tiposDeCargaModel */
     protected $tiposDeCargaModel;
 
+    /**
+     * @var JsonHelper
+     */
     protected $jsonHelper;
 
     /**
      * TiposDeCargaRepository constructor.
      * @param TiposDeCargaCatalog $tiposDeCargaModel
+     * @param JsonHelper $jsonHelper
      */
     public function __construct(TiposDeCargaCatalog $tiposDeCargaModel, JsonHelper $jsonHelper)
     {
@@ -35,43 +40,55 @@ class TiposDeCargaRepository
         return $this->tiposDeCargaModel::where('status', '=', 'ACTIVO')->get();
     }
 
-    public function newTipoDeCarga(string $tipoDeCarga)
+    /** @param array $tipoDeCarga
+     * @return TiposDeCargaCatalog
+     */
+    public function newTipoDeCarga(array $tipoDeCarga)
     {
-        $tipoDeCargaArray = $this->jsonHelper->decodeJSONString($tipoDeCarga);
+
         $newTipoDeCarga = new TiposDeCargaCatalog();
 
-        $newTipoDeCarga->nombre = $tipoDeCargaArray['nombre'];
-        $newTipoDeCarga->unidadMetrica = $tipoDeCargaArray['unidadMetrica'];
-        $newTipoDeCarga->descripcion = $tipoDeCargaArray['descripcion'];
-        $newTipoDeCarga->status = 'ACTIVO';
+        $newTipoDeCarga->nombre = $tipoDeCarga['nombre'];
+        $newTipoDeCarga->unidadMetrica = $tipoDeCarga['unidadMetrica'];
+        $newTipoDeCarga->descripcion = $tipoDeCarga['descripcion'];
+        $newTipoDeCarga->status = StatusConstants::ACTIVE_STATUS;
+
+        $newTipoDeCarga->save();
+
+        return $newTipoDeCarga;
     }
 
     /**
-     * @param TiposDeCargaCatalog $tipoDeCarga
+     * @param array $tipoDeCarga
+     * @return TiposDeCargaCatalog
      */
-    public function updateTipoDeCarga(string $tipoDeCarga)
+    public function updateTipoDeCarga(array $tipoDeCarga): TiposDeCargaCatalog
     {
-        $tipoDeCargaArray = $this->jsonHelper->decodeJSONString($tipoDeCarga);
-        $foundTipoDeCarga = $this->searchTipoDeCargaById($tipoDeCargaArray['id']);
+        $foundTipoDeCarga = $this->searchTipoDeCargaById($tipoDeCarga['id']);
 
-        $foundTipoDeCarga->nombre = $tipoDeCargaArray['nombre'];
-        $foundTipoDeCarga->unidadMetrica = $tipoDeCargaArray['unidadMetrica'];
-        $foundTipoDeCarga->descripcion = $tipoDeCargaArray['descripcion'];
+        $foundTipoDeCarga->nombre = $tipoDeCarga['nombre'];
+        $foundTipoDeCarga->unidadMetrica = $tipoDeCarga['unidadMetrica'];
+        $foundTipoDeCarga->descripcion = $tipoDeCarga['descripcion'];
 
         $foundTipoDeCarga->save();
+
+        return $foundTipoDeCarga;
 
     }
 
     /**
-     * @param TiposDeCargaCatalog $tipoDeCarga
+     * @param array $tipoDeCarga
+     * @return TiposDeCargaCatalog
      */
-    public function deleteTipoDeCarga(TiposDeCargaCatalog $tipoDeCarga)
+    public function deleteTipoDeCarga(array $tipoDeCarga): TiposDeCargaCatalog
     {
-        $foundTipoDeCarga = $this->searchTipoDeCargaById($tipoDeCarga->id);
+        $foundTipoDeCarga = $this->searchTipoDeCargaById($tipoDeCarga['id']);
 
-        $foundTipoDeCarga->status = 'BORRADO';
+        $foundTipoDeCarga->status = StatusConstants::DELETE_STATUS;
 
         $foundTipoDeCarga->save();
+
+        return $foundTipoDeCarga;
     }
 
     /**
