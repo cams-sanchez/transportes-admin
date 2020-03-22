@@ -4,12 +4,12 @@ namespace App\Decorators;
 
 
 use App\Models\TiposDeCargaCatalog;
-
+use App\Decorators\GenericResponsesDecorator;
 /**
  * Class TiposDeCargaCatalogControllerDecorator
  * @package App\Decorators
  */
-class TiposDeCargaCatalogControllerDecorator
+class TiposDeCargaCatalogControllerDecorator extends GenericResponsesDecorator
 {
     /** @var array $tiposDeCargaResponse */
     protected $tiposDeCargaResponse = [];
@@ -36,11 +36,6 @@ class TiposDeCargaCatalogControllerDecorator
         ];
     }
 
-
-    public function decorateErrorValidationResponse(string $errorReponse): array
-    {
-        return ['sucess' => false, 'error' => $errorReponse];
-    }
 
     public function decorateResponseTipoDeCarga(TiposDeCargaCatalog $newTipoDeCarga): array
     {

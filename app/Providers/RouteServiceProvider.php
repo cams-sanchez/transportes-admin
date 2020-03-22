@@ -86,5 +86,10 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/Catalogs/TiposDeCargaRoutes.php'));
 
+        Route::prefix('api/tiros')
+            ->middleware('auth:api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/Tiros/TirosRoutes.php'));
+
     }
 }

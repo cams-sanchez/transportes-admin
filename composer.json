@@ -9,9 +9,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
-        "ext-json": "^1.7",
+        "ext-imagick": "*",
+        "ext-json": "*",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
+        "intervention/image": "^2.5",
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.3",
         "laravel/tinker": "^2.0",

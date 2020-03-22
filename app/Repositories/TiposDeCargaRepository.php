@@ -37,7 +37,7 @@ class TiposDeCargaRepository
      */
     public function getAllTiposDeCarga()
     {
-        return $this->tiposDeCargaModel::where('status', '=', 'ACTIVO')->get();
+        return $this->tiposDeCargaModel::where('status', '=', StatusConstants::ACTIVE_STATUS)->get();
     }
 
     /** @param array $tipoDeCarga

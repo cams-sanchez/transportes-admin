@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Decorators\TiposDeCargaCatalogControllerDecorator;
-use App\Helpers\TipoDeCargaCatalogValidatorHelper;
+use App\Validators\ValidationRules;
 use App\Repositories\TiposDeCargaRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -33,7 +33,7 @@ class TiposDeCargaCatalogController extends Controller
     public function __construct(
         TiposDeCargaRepository $tiposDeCargaRepository,
         TiposDeCargaCatalogControllerDecorator $decorator,
-        TipoDeCargaCatalogValidatorHelper $validator)
+        ValidationRules $validator)
     {
         $this->tiposDeCargaRepository = $tiposDeCargaRepository;
         $this->decorator = $decorator;
