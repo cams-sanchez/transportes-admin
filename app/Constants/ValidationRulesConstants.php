@@ -26,7 +26,12 @@ class ValidationRulesConstants
         ],
         'upload' => [
             'id' => 'required',
-            'evidencia' => 'required|image|mimes:jpeg,jpg,png'
+            'evidencia' => 'required|image|mimes:jpeg,jpg,png',
+            'evidenciaLocal' => 'required|image|mimes:jpeg,jpg,png'
+        ],
+        'uploadExcel' => [
+            'id' => 'required',
+            'excelFile' => 'required|mimes:xls,xlsx'
         ]
     ];
 

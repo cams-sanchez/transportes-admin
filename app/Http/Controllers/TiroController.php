@@ -80,4 +80,25 @@ class TiroController extends Controller
          return response()->json($this->decorator->decorateTiroResponse($tiroFound));
     }
 
+
+    public function uploadExcel(Request $request)
+    {
+        $validator = Validator::make($request->all(), $this->validator->getRules('uploadExcel', 'tiro'));
+
+        if ($validator->fails()) {
+            return response()->json($this->decorator->decorateErrorValidationResponse($validator->messages()->first()));
+        }
+
+        $tiro = [
+            'id' => $request->get('id'),
+            'excelFile' => $request->file('excelFile'),
+        ];
+
+        $imageUrl = $this->fileHelper->uploadExcelFile($tiro);
+
+        $tiroFound = $this->tiroRepository->getTiroById($tiro);
+        //$tiroFound->url =$imageUrl;
+
+        return response()->json($this->decorator->decorateTiroResponse($tiroFound));
+    }
 }
