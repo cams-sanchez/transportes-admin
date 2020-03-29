@@ -17,7 +17,6 @@ class CreateViajesTable extends Migration
             $table->uuid('id')->primary();
             $table->string('tren_id', 50)->index();
             $table->string('estados_replubica_catalogs_id', 50)->index();
-            $table->string('jefe_de_sector_id', 50)->index();
             $table->string('nombre', 150)->index();
             $table->date('fecha_comienzo')->index()->nullable(true);
             $table->date('fecha_carga')->index()->nullable(true);
@@ -28,10 +27,6 @@ class CreateViajesTable extends Migration
             $table->foreign('tren_id')
                 ->references('id')
                 ->on('trens');
-
-            $table->foreign('jefe_de_sector_id')
-                ->references('id')
-                ->on('jefe_de_sectors');
 
             $table->foreign('estados_replubica_catalogs_id')
                 ->references('id')

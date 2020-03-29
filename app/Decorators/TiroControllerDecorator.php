@@ -5,6 +5,7 @@ namespace App\Decorators;
 
 use App\Models\Tiro;
 use App\Decorators\GenericResponsesDecorator;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class TiroControllerDecorator
@@ -14,6 +15,9 @@ class TiroControllerDecorator extends GenericResponsesDecorator
 {
     /** @var array $tirosResponse */
     protected $tirosResponse = [];
+
+    /** @var array $evidencias */
+    protected $evidencias = [];
 
     /**
      * @param  $tiros
@@ -64,6 +68,7 @@ class TiroControllerDecorator extends GenericResponsesDecorator
             'numero_de_pedido' => $tiro->numero_de_pedido,
             'notas' => $tiro->notas,
             'status' => $tiro->status,
+            'evidencias' =>$tiro->evidencias,
 
         ];
         return [
@@ -71,5 +76,4 @@ class TiroControllerDecorator extends GenericResponsesDecorator
             'tiro' => $this->tirosResponse
         ];
     }
-
 }

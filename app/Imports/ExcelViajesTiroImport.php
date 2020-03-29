@@ -3,7 +3,9 @@
 
 namespace App\Imports;
 
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
+
 
 class ExcelViajesTiroImport implements ToModel
 {
@@ -19,8 +21,8 @@ class ExcelViajesTiroImport implements ToModel
             'doc' => $row[5],
             'region' => $row[6],
             'fechaEntregaSolcitidada' => $row[7],
-            'propuesta361' => $row[8],
-            'observaciones' => $row[9],
+            'propuesta361' => Carbon::createFromFormat('Y-m-d H:i:s', $row[9]),
+            'observaciones' => Carbon::createFromFormat('Y-m-d H:i:s', $row[10]),
         ];
     }
 }

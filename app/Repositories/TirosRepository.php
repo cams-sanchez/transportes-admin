@@ -3,7 +3,7 @@
 
 namespace App\Repositories;
 
-use App\Helpers\JsonHelper;
+
 use App\Models\Tiro;
 use App\Constants\StatusConstants;
 
@@ -16,20 +16,14 @@ class TirosRepository
     /** @var Tiro $tiroModel */
     protected $tiroModel;
 
-    /**
-     * @var JsonHelper
-     */
-    protected $jsonHelper;
 
     /**
      * TirosRepository constructor.
      * @param Tiro $tiroModel
-     * @param JsonHelper $jsonHelper
      */
-    public function __construct(Tiro $tiroModel, JsonHelper $jsonHelper)
+    public function __construct(Tiro $tiroModel)
     {
         $this->tiroModel = $tiroModel;
-        $this->jsonHelper = $jsonHelper;
     }
 
     /**
@@ -54,5 +48,14 @@ class TirosRepository
     public function searchTiroById(string $tipoCargaId)
     {
         return $this->tiroModel::where('id', '=', $tipoCargaId)->get()->first();
+    }
+
+    /**
+     * @param string $delivery
+     * @return mixed
+     */
+    public function searchTiroBydelivery(string $delivery)
+    {
+        return $this->tiroModel::where('delivery', '=', $delivery)->get()->first();
     }
 }

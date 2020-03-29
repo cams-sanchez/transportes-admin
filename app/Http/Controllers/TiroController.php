@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Decorators\TiroControllerDecorator;
+use App\Handlers\EvidenciasImagesHandler;
+use App\Handlers\ExcelFileUploadHandler;
 use App\Helpers\FileHelper;
 use App\Repositories\TirosRepository;
 use App\Validators\ValidationRules;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -25,22 +28,36 @@ class TiroController extends Controller
     /** @var FileHelper $fileHelper */
     protected $fileHelper;
 
+    /** @var ExcelFileUploadHandler $excelHandler */
+    protected $excelHandler;
+
+    /** @var EvidenciasImagesHandler $excelHandler */
+    protected $evidenciasImagesHandler;
+
     /**
      * TiroController constructor.
      * @param TirosRepository $tiroRepository
      * @param TiroControllerDecorator $decorator
      * @param ValidationRules $validator
+     * @param FileHelper $fileHelper
+     * @param ExcelFileUploadHandler $excelHandler
+     * @param EvidenciasImagesHandler $evidenciasImagesHandler
      */
     public function __construct(
         TirosRepository $tiroRepository,
         TiroControllerDecorator $decorator,
         ValidationRules $validator,
-        FileHelper $fileHelper)
+        FileHelper $fileHelper,
+        ExcelFileUploadHandler $excelHandler,
+        EvidenciasImagesHandler $evidenciasImagesHandler
+    )
     {
         $this->tiroRepository = $tiroRepository;
         $this->decorator = $decorator;
         $this->validator = $validator;
         $this->fileHelper = $fileHelper;
+        $this->excelHandler = $excelHandler;
+        $this->evidenciasImagesHandler = $evidenciasImagesHandler;
     }
 
 
@@ -66,18 +83,20 @@ class TiroController extends Controller
 
         $tiro = [
             'id' => $request->get('id'),
-            'evidenciaFile' => $request->file('evidencia'),
-            'evidencias' => $request->allFiles()
+            'delivery' => $request->file('delivery'),
+            'establecimiento' => $request->file('establecimiento'),
+            'comentarios' => $request->get('comentarios'),
+            'latitude' => $request->get('latitude'),
+            'longitude' => $request->get('longitude'),
         ];
 
-        Log::debug("INCOMING VALUES ".print_r($tiro, true));
+        Log::debug("INCOMING VALUES " . print_r($tiro, true));
 
-        $imageUrl = $this->fileHelper->saveUploadedFile($tiro);
+        $this->evidenciasImagesHandler->processEvidenciasFilesForTiro($tiro);
 
         $tiroFound = $this->tiroRepository->getTiroById($tiro);
-        $tiroFound->url =$imageUrl;
 
-         return response()->json($this->decorator->decorateTiroResponse($tiroFound));
+        return response()->json($this->decorator->decorateTiroResponse($tiroFound));
     }
 
 
@@ -89,16 +108,21 @@ class TiroController extends Controller
             return response()->json($this->decorator->decorateErrorValidationResponse($validator->messages()->first()));
         }
 
-        $tiro = [
-            'id' => $request->get('id'),
+        $excelInfo = [
             'excelFile' => $request->file('excelFile'),
         ];
 
-        $imageUrl = $this->fileHelper->uploadExcelFile($tiro);
+        try {
+            $this->excelHandler->processUploadedExcelFile($excelInfo);
+        } catch (Exception $exception) {
 
-        $tiroFound = $this->tiroRepository->getTiroById($tiro);
-        //$tiroFound->url =$imageUrl;
+            Log::debug("Error Message While processing Excel Upload" . $exception->getMessage());
+            Log::debug("Error Trace: " . print_r($exception->getTrace(), true));
 
-        return response()->json($this->decorator->decorateTiroResponse($tiroFound));
+            return response()->json($this->decorator->decorateErrorFileUploadResponse());
+        }
+
+
+        return response()->json($this->decorator->decorateSuccesfullFileUpload(), 200);
     }
 }

@@ -15,18 +15,18 @@ class CreateEstablecimientosCatalogsTable extends Migration
     {
         Schema::create('establecimientos_catalogs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('tipo_id', 100)->index();
+            $table->string('tipo_id', 100)->index()->nullable(true);
             $table->string('nombre',200)->index();
-            $table->string('calle', 200);
-            $table->string('num_ext',20);
-            $table->string('num_int', 20);
-            $table->string('cp', 6)->index();
-            $table->string('estados_replubica_catalogs_id', 50)->index();
-            $table->string('municipio', 100);
-            $table->decimal('gps_location_lat', 10, 7)->index();
-            $table->decimal('gps_location_long', 10, 7)->index();
-            $table->string('encargado_recibir', 200);
-            $table->mediumText('contacto');
+            $table->string('calle', 200)->nullable(true);
+            $table->string('num_ext',20)->nullable(true);
+            $table->string('num_int', 20)->nullable(true);
+            $table->string('cp', 6)->index()->nullable(true);
+            $table->string('estados_replubica_catalogs_id', 50)->index()->nullable(true);
+            $table->string('municipio', 100)->nullable(true);
+            $table->decimal('gps_location_lat', 10, 7)->index()->nullable(true);
+            $table->decimal('gps_location_long', 10, 7)->index()->nullable(true);
+            $table->string('encargado_recibir', 200)->nullable(true);
+            $table->mediumText('contacto')->nullable(true);
             $table->string('status', 50)->index();
             $table->timestamps();
 

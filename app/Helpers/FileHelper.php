@@ -3,59 +3,51 @@
 
 namespace App\Helpers;
 
-
-use App\Imports\ExcelViajesTiroImport;
+use App\Constants\FileConstants;
 use App\Imports\UsersImport;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
-use Image;
-use Maatwebsite\Excel\Facades\Excel;
 
 
 class FileHelper
 {
-    public function saveUploadedFile(array $uplaodedFileResource)
+    public function saveUploadDeliveryImage(array $uploadResource)
     {
-        $pathToSave = $uplaodedFileResource['evidenciaFile']->move(
-            public_path("/uploadedImages/"), 'evidencia_' . $uplaodedFileResource['id'] . ".jpg"
+        $pathToSaveDeliveryImage = $uploadResource['delivery']->move(
+            public_path(FileConstants::EVIDENCE_DIRECTORY),
+            FileConstants::EVIDENCE_DELIVERY_SAVED_PREFIX . $uploadResource['id'] .
+            FileConstants::IMAGE_EXTENSION
         );
 
-        Log::debug("Path To file " . print_r($pathToSave, true));
+        Log::debug("Path To Delivery Image file " . print_r($pathToSaveDeliveryImage, true));
 
+        return $pathToSaveDeliveryImage;
+    }
 
-        Image::make($pathToSave)->resize(300, 200)->save(public_path("/uploadedImages/") . '_resized.jpg');
+    public function saveUploadEstablecimientoImage(array $uploadResource)
+    {
+        $pathToSaveDeliveryImage = $uploadResource['establecimiento']->move(
+            public_path(FileConstants::EVIDENCE_DIRECTORY),
+            FileConstants::EVIDENCE_ESTABLECIMIENTO_SAVED_PREFIX . $uploadResource['id'] .
+            FileConstants::IMAGE_EXTENSION
+        );
 
+        Log::debug("Path To Establecimiento Image file " . print_r($pathToSaveDeliveryImage, true));
 
-        $imageUrl = url("/uploadedImages/" . $uplaodedFileResource['id'] . ".jpg");
-
-        Log::debug("Images URL $imageUrl");
-
-        return $imageUrl;
-
+        return $pathToSaveDeliveryImage;
     }
 
     public function uploadExcelFile(array $excelFileResource)
     {
         $pathToSave = $excelFileResource['excelFile']->move(
-            public_path("/uploadedExcelFiles/"), 'TirosExcelFile.xlsx'
-        );
+            public_path(
+                FileConstants::EXCEL_DIRECTORY),
+                FileConstants::EXCEL_SAVED_NAME.Carbon::now().FileConstants::EXCEL_EXTENSION
+            );
 
-        Log::debug("Path To file " . print_r($pathToSave, true));
+        Log::debug("Path To Excel file " . print_r($pathToSave, true));
 
-
-        $excelInfo = Excel::toArray(new ExcelViajesTiroImport, '../public/uploadedExcelFiles/TirosExcelFile.xlsx');
-
-        foreach ($excelInfo[0] as $key => $item) {
-
-            if($key === 0){
-                continue;
-            }
-
-            Log::debug("ARRAY INFO " . print_r($item, true));
-
-            if ($key == 3) {
-                break;
-            }
-        }
+        return $pathToSave;
 
     }
 }

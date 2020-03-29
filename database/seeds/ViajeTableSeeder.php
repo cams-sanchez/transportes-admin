@@ -19,12 +19,10 @@ class ViajeTableSeeder extends Seeder
         $viaje = new Viaje();
         $tren = Tren::where('nombre', '=', 'Tren Zona Oeste Jalisco')->first();
         $estadoRep = EstadosReplubicaCatalog::where('estado', '=', 'Jalisco')->first();
-        $jefeSector = JefeDeSector::where('nombre', '=', 'Juan Ramon Saenz')->first();
         $fecha = Carbon::now();
 
         $viaje->tren_id = $tren->id;
         $viaje->estados_replubica_catalogs_id = $estadoRep->id;
-        $viaje->jefe_de_sector_id = $jefeSector->id;
         $viaje->nombre = 'Viaje Zapopan Jalisco';
         $viaje->fecha_comienzo = $fecha;
         $viaje->fecha_carga = $fecha;

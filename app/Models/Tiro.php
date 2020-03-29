@@ -26,7 +26,7 @@ class Tiro extends Model
 
     public function establecimiento()
     {
-        return $this->belongsTo('App\Models\Establecimiento');
+        return $this->belongsTo('App\Models\EstablecimientosCatalog');
     }
 
     public function operador()

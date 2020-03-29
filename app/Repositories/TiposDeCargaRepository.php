@@ -17,19 +17,12 @@ class TiposDeCargaRepository
     protected $tiposDeCargaModel;
 
     /**
-     * @var JsonHelper
-     */
-    protected $jsonHelper;
-
-    /**
      * TiposDeCargaRepository constructor.
      * @param TiposDeCargaCatalog $tiposDeCargaModel
-     * @param JsonHelper $jsonHelper
      */
-    public function __construct(TiposDeCargaCatalog $tiposDeCargaModel, JsonHelper $jsonHelper)
+    public function __construct(TiposDeCargaCatalog $tiposDeCargaModel)
     {
         $this->tiposDeCargaModel = $tiposDeCargaModel;
-        $this->jsonHelper = $jsonHelper;
     }
 
     /**

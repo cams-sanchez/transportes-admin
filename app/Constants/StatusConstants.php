@@ -11,5 +11,11 @@ class StatusConstants
 
     public const SUSPENDED_STATUS = 'SUSPENDIDO';
 
+    public const AWAITING_STATUS = 'PENDIENTE';
+
+    public const BLOCKED_STATUS = 'BLOQUEADO';
+
+    public const EVIDENCE_PROVIDED = 'PROVEIDA';
+
 }
 
