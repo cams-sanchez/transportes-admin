@@ -112,6 +112,8 @@ class TiroController extends Controller
             'excelFile' => $request->file('excelFile'),
         ];
 
+        Log::debug("INCOMING EXCEL VALUES ".print_r($excelInfo, true));
+
         try {
             $this->excelHandler->processUploadedExcelFile($excelInfo);
         } catch (Exception $exception) {
