@@ -19,4 +19,8 @@ class FileConstants
     public const EXCEL_EXTENSION = '.xlsx';
     public const EXCEL_SAVED_NAME = 'TirosExcelFile_';
 
+    public const S3_EXCEL_FOLDER = 'excelFiles/';
+    public const S3_ORIGINAL_IMAGES = 'originalEvidenceFiles/';
+    public const S3_RESIZED_IMAGES = 'resizedEvidenceImages/';
+
 }

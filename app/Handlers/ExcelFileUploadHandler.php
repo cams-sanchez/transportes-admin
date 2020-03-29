@@ -4,6 +4,7 @@
 namespace App\Handlers;
 
 
+use App\Constants\FileConstants;
 use App\Constants\StatusConstants;
 use App\Helpers\ExcelFileHelper;
 use App\Helpers\FileHelper;
@@ -22,6 +23,7 @@ use App\Repositories\JefeDeSectorRepository;
 use App\Repositories\TirosRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 
@@ -54,7 +56,11 @@ class ExcelFileUploadHandler
     /** @var array $infoFromExcel */
     protected $infoFromExcel = [];
 
+    /** @var string $excelFilePath */
+    protected string $excelFilePath = '';
 
+    /** @var string $s3ExceliFileUrl */
+    protected string $s3ExceliFileUrl = '';
     /**
      * ExcelFileUploadHandler constructor.
      * @param FileHelper $fileHelper
@@ -93,11 +99,29 @@ class ExcelFileUploadHandler
         return $this->excelFileHelper->readExcelFileInfoFromFile($pathToExcelFile);
     }
 
+    public function saveExcelFileToS3()
+    {
+        $this->fileHelper->saveExcelFileToS3($this->excelFilePath);
+    }
+
+    public function getS3Url()
+    {
+        $this->s3ExceliFileUrl = Storage::disk('s3')->url($this->fileHelper->s3ExcelFilePath);
+
+        Log::debug("URL FILE $this->s3ExceliFileUrl");
+    }
+
     public function processUploadedExcelFile(array $excelFileResource)
     {
-        $filePath = $this->saveUploadedFile($excelFileResource);
-        $this->infoFromExcel = $this->readExcelFile($filePath);
+        $this->excelFilePath = $this->saveUploadedFile($excelFileResource);
+        $this->saveExcelFileToS3();
+        $this->getS3Url();
+
+        Log::debug("S3 BOCKET PATH " . $this->fileHelper->s3ExcelFilePath);
+
+        $this->infoFromExcel = $this->readExcelFile($this->excelFilePath);
         $this->readExcelInfoAndCreateTiros();
+        $this->fileHelper->removeFileFromLocal($this->excelFilePath);
     }
 
     public function readExcelInfoAndCreateTiros()

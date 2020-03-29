@@ -21,6 +21,8 @@ use App\Repositories\JefeDeSectorRepository;
 use App\Repositories\TirosRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\File;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use function Psy\debug;
 
@@ -48,6 +50,12 @@ class EvidenciasImagesHandler
     protected string $urlDeliveryImage = '';
     protected string $urlEstablecimientoImage = '';
 
+    protected string $s3DeliveryUrl = '';
+    protected string $s3EstablecimientoUrl = '';
+
+    protected string $s3ResizedDeliveryUrl = '';
+    protected string $s3ResizedEstablecimientoUrl = '';
+
 
     /**
      * ExcelFileUploadHandler constructor.
@@ -70,20 +78,69 @@ class EvidenciasImagesHandler
         $this->pathToDeliveryImage = $this->fileHelper->saveUploadDeliveryImage($tiro);
         $this->pathToEstablecimientoImage = $this->fileHelper->saveUploadEstablecimientoImage($tiro);
 
+        $this->fileHelper->saveDeliveryImageToS3($this->pathToDeliveryImage, $tiro['id']);
+        $this->fileHelper->saveEstablecimientoImageToS3($this->pathToEstablecimientoImage, $tiro['id']);
+
+        $this->getS3DeliveryUrl();
+        $this->getS3EstablecimientoUrl();
+
+
         $this->resizedDeliveryImage = $this->dealWithImageConvertion($this->pathToDeliveryImage, $tiro['id'], 'delivery');
         $this->resizedEstablecimientoImage = $this->dealWithImageConvertion($this->pathToEstablecimientoImage, $tiro['id'], 'establecimiento');
 
         $this->urlDeliveryImage = $this->generateImageUrl($tiro['id'], 'delivery');
         $this->urlEstablecimientoImage = $this->generateImageUrl($tiro['id'], 'establecimiento');
 
+        $this->getS3ResizedDeliveryUrl();
+        $this->getS3ResizedEstablecimientoUrl();
+
         $this->dealWithDeliveryEvidence($tiro);
         $this->dealWithEstablecimientoEvidence($tiro);
 
+        $this->fileHelper->removeFileFromLocal($this->pathToDeliveryImage);
+        $this->fileHelper->removeFileFromLocal($this->pathToEstablecimientoImage);
+        $this->fileHelper->removeFileFromLocal($this->resizedDeliveryImage);
+        $this->fileHelper->removeFileFromLocal($this->resizedEstablecimientoImage);
+
+    }
+
+    public function getS3DeliveryUrl()
+    {
+        $this->s3DeliveryUrl = Storage::disk('s3')->url($this->fileHelper->s3DeliveryImagePath);
+
+        Log::debug("URL DELIVERY FILE $this->s3DeliveryUrl");
+    }
+
+    public function getS3EstablecimientoUrl()
+    {
+        $this->s3EstablecimientoUrl = Storage::disk('s3')->url($this->fileHelper->s3EstablecimientImagePath);
+
+        Log::debug("URL Establecimiento Resize FILE $this->s3EstablecimientoUrl");
+    }
+
+    public function getS3ResizedDeliveryUrl()
+    {
+        $this->s3ResizedDeliveryUrl = Storage::disk('s3')->url($this->fileHelper->s3ResizedDeliveryImagePath);
+
+        Log::debug("URL DELIVERY Resized FILE $this->s3ResizedDeliveryUrl");
+    }
+
+    public function getS3ResizedEstablecimientoUrl()
+    {
+        $this->s3ResizedEstablecimientoUrl = Storage::disk('s3')
+            ->url($this->fileHelper->s3ResizedEstablecimientImagePath);
+
+        Log::debug("URL Establecimiento FILE $this->s3EstablecimientoUrl");
     }
 
     public function dealWithImageConvertion(string $pathToImageToConvert, string $tiro_id, string $type = 'delivery')
     {
         $resizedImagePath = $this->imageHelper->convertImageFile($pathToImageToConvert, $tiro_id, $type);
+
+        $type === 'delivery' ?
+            $this->fileHelper->saveResizedDeliveryImageToS3($resizedImagePath, $tiro_id) :
+            $this->fileHelper->saveResizedEstablecimientoImageToS3($resizedImagePath, $tiro_id);
+
 
         Log::debug("Image Resize Path  $resizedImagePath");
 
@@ -122,9 +179,9 @@ class EvidenciasImagesHandler
 
             $delivery->tiro_id = $tiroResource['id'];
             $delivery->fecha_evidencia = Carbon::now();
-            $delivery->foto_url = $this->urlDeliveryImage;
+            $delivery->foto_url = $this->s3ResizedDeliveryUrl;
             $delivery->tipo = 'delivery';
-            $delivery->original_image_path = $this->pathToDeliveryImage;
+            $delivery->original_image_path = $this->s3DeliveryUrl;
             $delivery->comentarios = $tiroResource['comentarios'];
             $delivery->gps_location_lat = $tiroResource['latitude'];
             $delivery->gps_location_long = $tiroResource['longitude'];
@@ -136,8 +193,8 @@ class EvidenciasImagesHandler
         } else {
 
             $foundDeliveryForTiro->fecha_evidencia = Carbon::now();
-            $foundDeliveryForTiro->foto_url = $this->urlDeliveryImage;
-            $foundDeliveryForTiro->original_image_path = $this->pathToDeliveryImage;
+            $foundDeliveryForTiro->foto_url = $this->s3ResizedDeliveryUrl;
+            $foundDeliveryForTiro->original_image_path = $this->s3DeliveryUrl;
             $foundDeliveryForTiro->comentarios = $tiroResource['comentarios'];
             $foundDeliveryForTiro->gps_location_lat = $tiroResource['latitude'];
             $foundDeliveryForTiro->gps_location_long = $tiroResource['longitude'];
@@ -159,9 +216,9 @@ class EvidenciasImagesHandler
 
             $establecimiento->tiro_id = $tiroResource['id'];
             $establecimiento->fecha_evidencia = Carbon::now();
-            $establecimiento->foto_url = $this->urlEstablecimientoImage;
+            $establecimiento->foto_url = $this->s3ResizedEstablecimientoUrl;
             $establecimiento->tipo = 'establecimiento';
-            $establecimiento->original_image_path = $this->pathToEstablecimientoImage;
+            $establecimiento->original_image_path = $this->s3EstablecimientoUrl;
             $establecimiento->comentarios = $tiroResource['comentarios'];
             $establecimiento->gps_location_lat = $tiroResource['latitude'];
             $establecimiento->gps_location_long = $tiroResource['longitude'];
@@ -173,8 +230,8 @@ class EvidenciasImagesHandler
         } else {
 
             $foundEstablecimientForTiro->fecha_evidencia = Carbon::now();
-            $foundEstablecimientForTiro->foto_url = $this->urlEstablecimientoImage;
-            $foundEstablecimientForTiro->original_image_path = $this->pathToEstablecimientoImage;
+            $foundEstablecimientForTiro->foto_url = $this->s3ResizedEstablecimientoUrl;
+            $foundEstablecimientForTiro->original_image_path = $this->s3EstablecimientoUrl;
             $foundEstablecimientForTiro->comentarios = $tiroResource['comentarios'];
             $foundEstablecimientForTiro->gps_location_lat = $tiroResource['latitude'];
             $foundEstablecimientForTiro->gps_location_long = $tiroResource['longitude'];
