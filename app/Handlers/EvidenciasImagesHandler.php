@@ -41,6 +41,8 @@ class EvidenciasImagesHandler
 
     protected ImageFileHelper $imageHelper;
 
+    protected TirosRepository $tirosRepository;
+
     protected string $pathToDeliveryImage = '';
     protected string $pathToEstablecimientoImage = '';
 
@@ -62,19 +64,29 @@ class EvidenciasImagesHandler
      * @param FileHelper $fileHelper
      * @param ImageFileHelper $imageHelper
      * @param EvidenciasRepository $evidenciaRepository
+     * @param TirosRepository $tirosRepository
      */
     public function __construct(FileHelper $fileHelper,
                                 ImageFileHelper $imageHelper,
-                                EvidenciasRepository $evidenciaRepository
+                                EvidenciasRepository $evidenciaRepository,
+                                TirosRepository $tirosRepository
     )
     {
         $this->fileHelper = $fileHelper;
         $this->imageHelper = $imageHelper;
         $this->evidenciaRepository = $evidenciaRepository;
+        $this->tirosRepository = $tirosRepository;
     }
 
     public function processEvidenciasFilesForTiro(array $tiro)
     {
+
+        $tiroFound = $this->tirosRepository->getTiroById($tiro);
+
+        if (empty($tiroFound)) {
+            return false;
+        }
+
         $this->pathToDeliveryImage = $this->fileHelper->saveUploadDeliveryImage($tiro);
         $this->pathToEstablecimientoImage = $this->fileHelper->saveUploadEstablecimientoImage($tiro);
 
@@ -101,6 +113,12 @@ class EvidenciasImagesHandler
         $this->fileHelper->removeFileFromLocal($this->pathToEstablecimientoImage);
         $this->fileHelper->removeFileFromLocal($this->resizedDeliveryImage);
         $this->fileHelper->removeFileFromLocal($this->resizedEstablecimientoImage);
+
+        $updatedTiro = $this->tirosRepository->getTiroById($tiro);
+        $updatedTiro->status = StatusConstants::TIRO_DONE;
+        $updatedTiro->save();
+
+        return $updatedTiro;
 
     }
 
@@ -170,8 +188,6 @@ class EvidenciasImagesHandler
     public function dealWithDeliveryEvidence(array $tiroResource)
     {
         $foundDeliveryForTiro = $this->evidenciaRepository->getDeliveryEvidenciaForTiroId($tiroResource['id']);
-
-        Log::debug("FOUND DELIVERY EVIDENCE " . print_r($foundDeliveryForTiro->toArray(), true));
 
         if (empty($foundDeliveryForTiro)) {
 

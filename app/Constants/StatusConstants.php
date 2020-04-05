@@ -17,5 +17,7 @@ class StatusConstants
 
     public const EVIDENCE_PROVIDED = 'PROVEIDA';
 
+    public const TIRO_DONE = 'TERMINADO';
+
 }
 

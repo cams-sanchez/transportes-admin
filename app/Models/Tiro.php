@@ -34,7 +34,7 @@ class Tiro extends Model
         return $this->belongsTo(('App\Models\Operadores'));
     }
 
-    public function detalles_carga()
+    public function carga()
     {
         return $this->hasMany('App\Models\DetallesDeCarga');
     }
@@ -51,6 +51,11 @@ class Tiro extends Model
 
     public function unidad()
     {
-        return $this->hasMany('App\Models\Unidad');
+        return $this->belongsTo('App\Models\Unidad');
+    }
+
+    public function jefeDeSector()
+    {
+        return $this->belongsTo('App\Models\JefeDeSector');
     }
 }

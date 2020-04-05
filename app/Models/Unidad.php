@@ -18,6 +18,6 @@ class Unidad extends Model
     }
 
     public function tiro() {
-        return $this->belongsTo('App\Models\Tiro');
+        return $this->hasMany('App\Models\Tiro');
     }
 }

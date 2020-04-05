@@ -31,7 +31,10 @@ class ValidationRulesConstants
         ],
         'uploadExcel' => [
             'excelFile' => 'required|mimes:xls,xlsx'
-        ]
+        ],
+        'searchByDelivery' => [
+            'deliveryNumber' => 'required',
+        ],
     ];
 
 

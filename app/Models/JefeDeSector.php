@@ -13,4 +13,9 @@ class JefeDeSector extends Model
     {
         return $this->hasMany('App\Models\Viaje');
     }
+
+    public function tiros()
+    {
+        return $this->hasMany('App\Models\Tiro');
+    }
 }

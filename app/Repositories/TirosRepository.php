@@ -40,12 +40,17 @@ class TirosRepository
         return $this->searchTiroById($tiro['id']);
     }
 
+    public function getTiroByDeliveryNumber(array $tiroToFind)
+    {
+        return $this->searchTiroByDelivery($tiroToFind['deliveryNumber']);
+    }
+
 
     /**
      * @param string $tipoCargaId
      * @return mixed
      */
-    public function searchTiroById(string $tipoCargaId)
+    protected function searchTiroById(string $tipoCargaId)
     {
         return $this->tiroModel::where('id', '=', $tipoCargaId)->get()->first();
     }
@@ -54,7 +59,7 @@ class TirosRepository
      * @param string $delivery
      * @return mixed
      */
-    public function searchTiroBydelivery(string $delivery)
+    protected function searchTiroByDelivery(string $delivery)
     {
         return $this->tiroModel::where('delivery', '=', $delivery)->get()->first();
     }

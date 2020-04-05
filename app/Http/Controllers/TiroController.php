@@ -73,6 +73,21 @@ class TiroController extends Controller
         return response()->json($this->decorator->decorateAllTirosResponse($tiros));
     }
 
+    public function getByDelivery(string $deliveryNumber)
+    {
+        Log::debug("DELIVERY NUMBER " . $deliveryNumber);
+
+        $tiroToFind = [
+            'deliveryNumber' => $deliveryNumber,
+        ];
+
+        Log::debug("Tiro To Find " . print_r($tiroToFind, 1));
+
+        $foundTiro = $this->tiroRepository->getTiroByDeliveryNumber($tiroToFind);
+
+        return response()->json($this->decorator->decorateTiroResponse($foundTiro));
+    }
+
     public function uploadEvidenciaToTiro(Request $request)
     {
         $validator = Validator::make($request->all(), $this->validator->getRules('upload', 'tiro'));
@@ -92,11 +107,14 @@ class TiroController extends Controller
 
         Log::debug("INCOMING VALUES " . print_r($tiro, true));
 
-        $this->evidenciasImagesHandler->processEvidenciasFilesForTiro($tiro);
+        $returnedValue = $this->evidenciasImagesHandler->processEvidenciasFilesForTiro($tiro);
 
-        $tiroFound = $this->tiroRepository->getTiroById($tiro);
+        if ($returnedValue === false) {
+            return response()->json($this->decorator->decorateErrorValidationResponse("Failed To process Images"));
+        }
 
-        return response()->json($this->decorator->decorateTiroResponse($tiroFound));
+
+        return response()->json($this->decorator->decorateTiroResponse($returnedValue));
     }
 
 
@@ -112,7 +130,7 @@ class TiroController extends Controller
             'excelFile' => $request->file('excelFile'),
         ];
 
-        Log::debug("INCOMING EXCEL VALUES ".print_r($excelInfo, true));
+        Log::debug("INCOMING EXCEL VALUES " . print_r($excelInfo, true));
 
         try {
             $this->excelHandler->processUploadedExcelFile($excelInfo);

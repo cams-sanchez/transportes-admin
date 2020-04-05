@@ -136,7 +136,7 @@ class ExcelFileUploadHandler
     {
         Log::debug("TIRO A PROCESAR " . print_r($newTiro, true));
 
-        $this->tiro = $this->tiroRepository->searchTiroBydelivery($newTiro[1]);
+        $this->tiro = $this->tiroRepository->getTiroByDeliveryNumber(['deliveryNumber' => $newTiro[1]]);
 
 
         if (empty($this->tiro)) {
