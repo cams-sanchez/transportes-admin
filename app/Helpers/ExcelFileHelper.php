@@ -25,9 +25,9 @@ class ExcelFileHelper
 
             Log::debug("ARRAY INFO " . print_r($item, true));
 
-            if ($key == 3) {
+            /*if ($key == 3) {
                 break;
-            }
+            }*/
         }
 
         return $arrayInfo;

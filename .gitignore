@@ -13,8 +13,8 @@ yarn-error.log
 .idea
 /.idea
 .idea/workspace.xml
-../public/uploadedImages/*.xls
-../public/uploadedImages/*.xlsx
-../public/uploadedExcelFiles/*.jpg
-../public/uploadedExcelFiles/*.jpeg
-../public/uploadedExcelFiles/*.png
+/public/uploadedImages/*.jpg
+/public/uploadedImages/*.jpeg
+/public/uploadedImages/*.png
+/public/uploadedExcelFiles/*.xls
+/public/uploadedExcelFiles/*.xlsx
