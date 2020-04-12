@@ -145,4 +145,50 @@ class TiroController extends Controller
 
         return response()->json($this->decorator->decorateSuccesfullFileUpload(), 200);
     }
+
+    public function tirosByDateRange(string $startDate, string $endDate)
+    {
+        Log::debug("START DATE " . $startDate. " END DATE $endDate");
+
+        $tirosToFind = [
+            'startDate' => $startDate,
+            'endDate' => $endDate
+        ];
+
+        Log::debug("Tiro To Find " . print_r($tirosToFind, 1));
+
+        $foundTiros = $this->tiroRepository->getTirosByDateRange($tirosToFind);
+
+        return response()->json($this->decorator->decorateAllTirosResponse($foundTiros));
+    }
+
+    public function tirosByViaje(string $viajeId)
+    {
+        Log::debug("Viaje " . $viajeId);
+
+        $tirosToFind = [
+            'viajeId' => $viajeId,
+        ];
+
+        Log::debug("Tiro To Find " . print_r($tirosToFind, 1));
+
+        $foundTiros = $this->tiroRepository->getTirosByViaje($tirosToFind);
+
+        return response()->json($this->decorator->decorateAllTirosResponse($foundTiros));
+    }
+
+    public function tirosByCiudad(string $ciudad)
+    {
+        Log::debug("Ciudad " . $ciudad);
+
+        $tirosToFind = [
+            'ciudad' => $ciudad,
+        ];
+
+        Log::debug("Tiro To Find " . print_r($tirosToFind, 1));
+
+        $foundTiros = $this->tiroRepository->getTirosByCiudad($tirosToFind);
+
+        return response()->json($this->decorator->decorateAllTirosResponse($foundTiros));
+    }
 }

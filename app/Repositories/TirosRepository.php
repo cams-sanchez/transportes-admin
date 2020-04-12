@@ -34,7 +34,6 @@ class TirosRepository
         return $this->tiroModel::where('status', '=', StatusConstants::ACTIVE_STATUS)->get();
     }
 
-
     public function getTiroById(array $tiro)
     {
         return $this->searchTiroById($tiro['id']);
@@ -45,6 +44,25 @@ class TirosRepository
         return $this->searchTiroByDelivery($tiroToFind['deliveryNumber']);
     }
 
+    public function getTirosByDateRange(array $tirosToFind)
+    {
+        $startDate = date($tirosToFind['startDate']. ' 00:00:00');
+        $endDate = date($tirosToFind['endDate']. ' 23:59:59');
+
+        return $this->tiroModel::whereBetween('created_at', [$startDate, $endDate])->
+        orderBy('created_at', 'desc')->
+        get();
+    }
+
+    public function getTirosByViaje(array $tirosToFind)
+    {
+        return $this->tiroModel::where('viaje_id', '=', $tirosToFind['viajeId'])->get();
+    }
+
+    public function getTirosByCiudad(array $tirosToFind)
+    {
+        return $this->tiroModel::where('ciudad', '=', $tirosToFind['ciudad'])->get();
+    }
 
     /**
      * @param string $tipoCargaId

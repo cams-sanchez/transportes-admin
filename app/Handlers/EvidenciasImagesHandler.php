@@ -6,25 +6,14 @@ namespace App\Handlers;
 
 use App\Constants\FileConstants;
 use App\Constants\StatusConstants;
-use App\Helpers\ExcelFileHelper;
 use App\Helpers\FileHelper;
 use App\Helpers\ImageFileHelper;
-use App\Models\EstablecimientosCatalog;
-use App\Models\EstadosReplubicaCatalog;
 use App\Models\Evidencia;
-use App\Models\JefeDeSector;
-use App\Models\Tiro;
-use App\Repositories\EstablecimientosRepository;
-use App\Repositories\EstadosRepublicaRepository;
 use App\Repositories\EvidenciasRepository;
-use App\Repositories\JefeDeSectorRepository;
 use App\Repositories\TirosRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use phpDocumentor\Reflection\File;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
-use function Psy\debug;
 
 
 class EvidenciasImagesHandler
