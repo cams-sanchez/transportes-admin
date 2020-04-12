@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Decorators\TiroControllerDecorator;
 use App\Handlers\EvidenciasImagesHandler;
 use App\Handlers\ExcelFileUploadHandler;
+use App\Handlers\StatisticsHandler;
 use App\Helpers\FileHelper;
 use App\Repositories\TirosRepository;
 use App\Validators\ValidationRules;
@@ -34,6 +35,9 @@ class TiroController extends Controller
     /** @var EvidenciasImagesHandler $excelHandler */
     protected $evidenciasImagesHandler;
 
+    /** @var StatisticsHandler $statisticsHandler */
+    protected $statisticsHandler;
+
     /**
      * TiroController constructor.
      * @param TirosRepository $tiroRepository
@@ -42,6 +46,7 @@ class TiroController extends Controller
      * @param FileHelper $fileHelper
      * @param ExcelFileUploadHandler $excelHandler
      * @param EvidenciasImagesHandler $evidenciasImagesHandler
+     * @param StatisticsHandler $statisticsHandler
      */
     public function __construct(
         TirosRepository $tiroRepository,
@@ -49,7 +54,8 @@ class TiroController extends Controller
         ValidationRules $validator,
         FileHelper $fileHelper,
         ExcelFileUploadHandler $excelHandler,
-        EvidenciasImagesHandler $evidenciasImagesHandler
+        EvidenciasImagesHandler $evidenciasImagesHandler,
+        StatisticsHandler $statisticsHandler
     )
     {
         $this->tiroRepository = $tiroRepository;
@@ -58,6 +64,7 @@ class TiroController extends Controller
         $this->fileHelper = $fileHelper;
         $this->excelHandler = $excelHandler;
         $this->evidenciasImagesHandler = $evidenciasImagesHandler;
+        $this->statisticsHandler = $statisticsHandler;
     }
 
 
@@ -113,7 +120,6 @@ class TiroController extends Controller
             return response()->json($this->decorator->decorateErrorValidationResponse("Failed To process Images"));
         }
 
-
         return response()->json($this->decorator->decorateTiroResponse($returnedValue));
     }
 
@@ -148,7 +154,7 @@ class TiroController extends Controller
 
     public function tirosByDateRange(string $startDate, string $endDate)
     {
-        Log::debug("START DATE " . $startDate. " END DATE $endDate");
+        Log::debug("START DATE " . $startDate . " END DATE $endDate");
 
         $tirosToFind = [
             'startDate' => $startDate,
@@ -159,7 +165,9 @@ class TiroController extends Controller
 
         $foundTiros = $this->tiroRepository->getTirosByDateRange($tirosToFind);
 
-        return response()->json($this->decorator->decorateAllTirosResponse($foundTiros));
+        $statictics = $this->statisticsHandler->getFoundTirosStatistics($foundTiros);
+
+        return response()->json($this->decorator->decorateAllTirosResponse($foundTiros, $statictics));
     }
 
     public function tirosByViaje(string $viajeId)
@@ -174,7 +182,9 @@ class TiroController extends Controller
 
         $foundTiros = $this->tiroRepository->getTirosByViaje($tirosToFind);
 
-        return response()->json($this->decorator->decorateAllTirosResponse($foundTiros));
+        $statictics = $this->statisticsHandler->getFoundTirosStatistics($foundTiros);
+
+        return response()->json($this->decorator->decorateAllTirosResponse($foundTiros, $statictics));
     }
 
     public function tirosByCiudad(string $ciudad)
@@ -188,7 +198,8 @@ class TiroController extends Controller
         Log::debug("Tiro To Find " . print_r($tirosToFind, 1));
 
         $foundTiros = $this->tiroRepository->getTirosByCiudad($tirosToFind);
+        $statictics = $this->statisticsHandler->getFoundTirosStatistics($foundTiros);
 
-        return response()->json($this->decorator->decorateAllTirosResponse($foundTiros));
+        return response()->json($this->decorator->decorateAllTirosResponse($foundTiros, $statictics));
     }
 }

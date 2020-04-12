@@ -20,10 +20,11 @@ class TiroControllerDecorator extends GenericResponsesDecorator
     protected $evidencias = [];
 
     /**
-     * @param  $tiros
+     * @param  array $tiros
+     * @param array $statisctics
      * @return array
      */
-    public function decorateAllTirosResponse($tiros): array
+    public function decorateAllTirosResponse(object $tiros, array $statisctics = []): array
     {
 
         foreach ($tiros as $tiro) {
@@ -53,7 +54,8 @@ class TiroControllerDecorator extends GenericResponsesDecorator
 
         return [
             'success' => true,
-            'tiros' => $this->tirosResponse
+            'tiros' => $this->tirosResponse,
+            'statistics' => $statisctics
         ];
     }
 

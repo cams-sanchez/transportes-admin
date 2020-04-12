@@ -46,12 +46,12 @@ class TirosRepository
 
     public function getTirosByDateRange(array $tirosToFind)
     {
-        $startDate = date($tirosToFind['startDate']. ' 00:00:00');
-        $endDate = date($tirosToFind['endDate']. ' 23:59:59');
+        $startDate = date($tirosToFind['startDate'] . ' 00:00:00');
+        $endDate = date($tirosToFind['endDate'] . ' 23:59:59');
 
-        return $this->tiroModel::whereBetween('created_at', [$startDate, $endDate])->
-        orderBy('created_at', 'desc')->
-        get();
+        return $this->tiroModel::whereBetween('created_at', [$startDate, $endDate])
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
     public function getTirosByViaje(array $tirosToFind)
