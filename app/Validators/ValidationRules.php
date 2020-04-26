@@ -33,6 +33,9 @@ class ValidationRules
             case 'tiro':
                 $constant = ValidationRulesConstants::TIROS_RULES;
                 break;
+            case 'temporada':
+                $constant = ValidationRulesConstants::TEMPORADAS_RULES;
+                break;
         }
 
         return $constant;

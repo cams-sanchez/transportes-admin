@@ -37,6 +37,18 @@ class ValidationRulesConstants
         ],
     ];
 
+    public const  TEMPORADAS_RULES = [
+        'delete' => [
+            'id' => 'required',
+        ],
+        'update' => [
+            'id' => 'required',
+            'nombre' => 'required',
+        ],
+        'create' => [
+            'nombre' => 'required',
+        ],
+    ];
 
 }
 

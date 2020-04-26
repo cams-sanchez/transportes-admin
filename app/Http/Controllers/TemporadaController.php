@@ -2,84 +2,62 @@
 
 namespace App\Http\Controllers;
 
+use App\Decorators\TemporadaControllerDecorator;
+use App\Decorators\TiroControllerDecorator;
+use App\Repositories\TemporadaRepository;
 use App\Temporada;
+use App\Validators\ValidationRules;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TemporadaController extends Controller
 {
+
+    /** @var TemporadaControllerDecorator $decorator */
+    protected $decorator;
+
+    /** @var ValidationRules $validator */
+    protected $validator;
+
+    /** @var TemporadaRepository $repository */
+    protected $repository;
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * TemporadaController constructor.
+     * @param ValidationRules $validator
+     * @param TemporadaControllerDecorator $decorator
      */
+    public function __construct(
+        ValidationRules $validator,
+        TemporadaControllerDecorator $decorator,
+        TemporadaRepository $repository
+    )
+    {
+        $this->validator = $validator;
+        $this->decorator = $decorator;
+        $this->repository = $repository;
+    }
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Request $request)
     {
-        //
-    }
+        $validator = Validator::make($request->all(), $this->validator->getRules('create', 'temporada'));
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if ($validator->fails()) {
+            return response()->json($this->decorator->decorateErrorValidationResponse($validator->messages()->first()));
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Temporada  $temporada
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Temporada $temporada)
-    {
-        //
-    }
+        $temporada = [
+            'nombre' => $request->file('delivery'),
+            'descripcion' => $request->file('establecimiento'),
+        ];
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Temporada  $temporada
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Temporada $temporada)
-    {
-        //
-    }
+        $returnedValue = $this->repository->newTemporada($temporada);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Temporada  $temporada
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Temporada $temporada)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Temporada  $temporada
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Temporada $temporada)
-    {
-        //
+        return response()->json($this->decorator->decorateTemporadaResponse($returnedValue));
     }
 }
