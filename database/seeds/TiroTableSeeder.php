@@ -91,7 +91,7 @@ class TiroTableSeeder extends Seeder
             $tiroObj->notas = $tiro['notas'];
             $tiroObj->status = $tiro['status'];
 
-            $tiroObj->save();
+            //$tiroObj->save();
 
         }
     }

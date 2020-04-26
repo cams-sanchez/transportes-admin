@@ -13,21 +13,26 @@ class ImageFileHelper
 
     public function convertImageFile(string $pathToFile, string $tiro_id, string $type = 'delivery')
     {
-        $image = Image::make($pathToFile)->resize(FileConstants::EVIDENCE_WIDTH_RESIZE, FileConstants::EVIDENCE_HEIGHT_RESIZE);
 
-        $imagePrefix = ($type === 'delivery') ?
-            FileConstants::EVIDENCE_DELIVERY_SAVED_PREFIX :
-            FileConstants::EVIDENCE_ESTABLECIMIENTO_SAVED_PREFIX;
+        $imageNewPathSave = $pathToFile;
 
-        $imageNewPathSave = public_path(FileConstants::EVIDENCE_DIRECTORY) .
-            $imagePrefix .
-            $tiro_id .
-            FileConstants::EVIDENCE_RESIZED_FILE_SUFFIX .
-            FileConstants::EVIDENCE_RESIZED_EXTENSION;
+        if(filesize($pathToFile)>700000) {
+            $image = Image::make($pathToFile)->resize(FileConstants::EVIDENCE_WIDTH_RESIZE, FileConstants::EVIDENCE_HEIGHT_RESIZE);
 
-        Log::debug("IMAGE PATH TO SAVE $imageNewPathSave");
+            $imagePrefix = ($type === 'delivery') ?
+                FileConstants::EVIDENCE_DELIVERY_SAVED_PREFIX :
+                FileConstants::EVIDENCE_ESTABLECIMIENTO_SAVED_PREFIX;
 
-        $image->save($imageNewPathSave, 90, 'png');
+            $imageNewPathSave = public_path(FileConstants::EVIDENCE_DIRECTORY) .
+                $imagePrefix .
+                $tiro_id .
+                FileConstants::EVIDENCE_RESIZED_FILE_SUFFIX .
+                FileConstants::EVIDENCE_RESIZED_EXTENSION;
+
+            Log::debug("IMAGE PATH TO SAVE $imageNewPathSave");
+
+            $image->save($imageNewPathSave, 90, 'png');
+        }
 
         return $imageNewPathSave;
     }

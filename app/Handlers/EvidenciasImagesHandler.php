@@ -79,11 +79,11 @@ class EvidenciasImagesHandler
         $this->pathToDeliveryImage = $this->fileHelper->saveUploadDeliveryImage($tiro);
         $this->pathToEstablecimientoImage = $this->fileHelper->saveUploadEstablecimientoImage($tiro);
 
-        $this->fileHelper->saveDeliveryImageToS3($this->pathToDeliveryImage, $tiro['id']);
-        $this->fileHelper->saveEstablecimientoImageToS3($this->pathToEstablecimientoImage, $tiro['id']);
+        //$this->fileHelper->saveDeliveryImageToS3($this->pathToDeliveryImage, $tiro['id']);
+        //$this->fileHelper->saveEstablecimientoImageToS3($this->pathToEstablecimientoImage, $tiro['id']);
 
-        $this->getS3DeliveryUrl();
-        $this->getS3EstablecimientoUrl();
+        //$this->getS3DeliveryUrl();
+        //$this->getS3EstablecimientoUrl();
 
 
         $this->resizedDeliveryImage = $this->dealWithImageConvertion($this->pathToDeliveryImage, $tiro['id'], 'delivery');

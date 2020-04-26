@@ -12,17 +12,15 @@ class ExcelViajesTiroImport implements ToModel
 
     public function model(array $row): array
     {
+
         return [
             'ciudad'     => $row[0],
-            'delivery'    => $row[1],
-            'jefeDeSector' => $row[2],
-            'solic' => $row[3],
-            'nombre' => $row[4],
-            'doc' => $row[5],
-            'region' => $row[6],
-            'fechaEntregaSolcitidada' => $row[7],
-            'propuesta361' => Carbon::createFromFormat('Y-m-d H:i:s', $row[9]),
-            'observaciones' => Carbon::createFromFormat('Y-m-d H:i:s', $row[10]),
+            'jefeDeSector' => $row[1],
+            'delivery'    => $row[2],
+            'nombre' => $row[3],
+            'region' => $row[4],
+            'fechaEntregaSolcitidada' => $row[5],
+            'propuesta361' => $row[6],
         ];
     }
 }

@@ -22,10 +22,7 @@ class CreateTirosTable extends Migration
             $table->string('tipo_carga_id', 50)->index();
             $table->decimal('cantidad', 8, 2);
             $table->string('delivery', 20)->index();
-            $table->string('epv', 20)->index();
             $table->string('jefe_de_sector_id', 50)->index();
-            $table->string('sdic', 20)->index();
-            $table->string('doc', 20)->index();
             $table->string('region', 20)->index();
             $table->date('fecha_entrega_solicitada')->index();
             $table->date('propuesta_361')->index();

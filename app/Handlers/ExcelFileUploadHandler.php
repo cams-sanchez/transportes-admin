@@ -96,7 +96,7 @@ class ExcelFileUploadHandler
 
     public function readExcelFile(string $pathToExcelFile)
     {
-        return $this->excelFileHelper->readExcelFileInfoFromFile($pathToExcelFile);
+        return $this->excelFileHelper->readExcelFileInfo($pathToExcelFile);
     }
 
     public function saveExcelFileToS3()
@@ -117,8 +117,6 @@ class ExcelFileUploadHandler
         $this->saveExcelFileToS3();
         $this->getS3Url();
 
-        Log::debug("S3 BOCKET PATH " . $this->fileHelper->s3ExcelFilePath);
-
         $this->infoFromExcel = $this->readExcelFile($this->excelFilePath);
         $this->readExcelInfoAndCreateTiros();
         $this->fileHelper->removeFileFromLocal($this->excelFilePath);
@@ -130,19 +128,21 @@ class ExcelFileUploadHandler
 
             $this->createNewTiro($newTiro);
         }
+
     }
 
     public function createNewTiro(array $newTiro)
     {
-        Log::debug("TIRO A PROCESAR " . print_r($newTiro, true));
-
-        $this->tiro = $this->tiroRepository->getTiroByDeliveryNumber(['deliveryNumber' => $newTiro[1]]);
+        $this->tiro = $this->tiroRepository->getTiroByDeliveryNumber(
+            [
+                'deliveryNumber' => $newTiro['delivery']
+            ]);
 
 
         if (empty($this->tiro)) {
 
-            $jefeDeSector = $this->dealWithJefeDeSector($newTiro[3]);
-            $establecimiento = $this->dealWithEstablecimientoInformation($newTiro[5]);
+            $jefeDeSector = $this->dealWithJefeDeSector($newTiro['jefeDeSector']);
+            $establecimiento = $this->dealWithEstablecimientoInformation($newTiro['nombre']);
 
             $viaje = Viaje::get()->first();
             $unidad = Unidad::get()->first();
@@ -153,19 +153,16 @@ class ExcelFileUploadHandler
             $this->tiro->viaje_id = $viaje->id;
             $this->tiro->unidad_id = $unidad->id;
             $this->tiro->establecimiento_id = $establecimiento->id;
-            $this->tiro->ciudad = $newTiro[0];
+            $this->tiro->ciudad = $newTiro['ciudad'];
             $this->tiro->tipo_carga_id = $carga->id;
             $this->tiro->cantidad = 0;
-            $this->tiro->delivery = $newTiro[1];
-            $this->tiro->epv = $newTiro[2];
+            $this->tiro->delivery = $newTiro['delivery'];
             $this->tiro->jefe_de_sector_id = $jefeDeSector->id;
-            $this->tiro->sdic = $newTiro[4];
-            $this->tiro->doc = $newTiro[6];
-            $this->tiro->region = $newTiro[1];
-            $this->tiro->fecha_entrega_solicitada = Carbon::instance(Date::excelToDateTimeObject($newTiro[9]));
-            $this->tiro->propuesta_361 = Carbon::instance(Date::excelToDateTimeObject($newTiro[10]));
-            $this->tiro->notas = '';
+            $this->tiro->region = $newTiro['region'];
+            $this->tiro->fecha_entrega_solicitada = Carbon::instance(Date::excelToDateTimeObject($newTiro['fechaEntregaSolcitidada']));
+            $this->tiro->propuesta_361 = Carbon::instance(Date::excelToDateTimeObject($newTiro['propuesta361']));
             $this->tiro->status = StatusConstants::ACTIVE_STATUS;
+            $this->tiro->notas = '';
 
             $this->tiro->save();
         }
@@ -173,42 +170,32 @@ class ExcelFileUploadHandler
         $evidencias = $this->evidenciasRepository->getEvidenciasForTiroId($this->tiro->id);
 
         if (empty($evidencias)) {
-
-            $delivery = new Evidencia();
-
-            $delivery->tiro_id = $this->tiro->id;
-            $delivery->fecha_evidencia = Carbon::now();
-            $delivery->foto_url = '';
-            $delivery->tipo = 'delivery';
-            $delivery->original_image_path = '';
-            $delivery->comentarios = '';
-            $delivery->gps_location_lat = 0.0;
-            $delivery->gps_location_long = 0.0;
-            $delivery->status = StatusConstants::AWAITING_STATUS;
-
-            $delivery->save();
-
-            $establecimiento = new Evidencia();
-
-            $establecimiento->tiro_id = $this->tiro->id;
-            $establecimiento->fecha_evidencia = Carbon::now();
-            $establecimiento->foto_url = '';
-            $establecimiento->tipo = 'establecimiento';
-            $establecimiento->original_image_path = '';
-            $establecimiento->comentarios = '';
-            $establecimiento->gps_location_lat = 0.0;
-            $establecimiento->gps_location_long = 0.0;
-            $establecimiento->status = StatusConstants::AWAITING_STATUS;
-
-            $establecimiento->save();
-
             $evidencias = [
-                0 => $delivery,
-                1 => $establecimiento,
+                0 => $this->saveEvidencias('delivery'),
+                1 => $this->saveEvidencias('establecimiento'),
             ];
         }
 
         $this->tiro->evidencias = $evidencias;
+    }
+
+    protected function saveEvidencias($evidenciaType='delivery') {
+        $evidencia = new Evidencia();
+
+        $evidencia->tiro_id = $this->tiro->id;
+        $evidencia->fecha_evidencia = Carbon::now();
+        $evidencia->foto_url = '';
+        $evidencia->tipo = $evidenciaType;
+        $evidencia->original_image_path = '';
+        $evidencia->comentarios = '';
+        $evidencia->gps_location_lat = 0.0;
+        $evidencia->gps_location_long = 0.0;
+        $evidencia->status = StatusConstants::AWAITING_STATUS;
+
+        $evidencia->save();
+
+        return $evidencia;
+
     }
 
     public function dealWithEstadoInformation(string $estadoToWorkWith)

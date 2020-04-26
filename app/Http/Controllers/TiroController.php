@@ -15,6 +15,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
+
+ini_set('memory_limit', '500M');
+set_time_limit ( 180 );
+
 class TiroController extends Controller
 {
     /** @var TirosRepository $tiroRepository */
@@ -143,7 +147,7 @@ class TiroController extends Controller
         } catch (Exception $exception) {
 
             Log::debug("Error Message While processing Excel Upload" . $exception->getMessage());
-            Log::debug("Error Trace: " . print_r($exception->getTrace(), true));
+            //Log::debug("Error Trace: " . print_r($exception->getTrace(), true));
 
             return response()->json($this->decorator->decorateErrorFileUploadResponse());
         }

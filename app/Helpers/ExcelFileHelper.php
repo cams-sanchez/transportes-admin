@@ -7,12 +7,14 @@ namespace App\Helpers;
 use App\Imports\ExcelViajesTiroImport;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class ExcelFileHelper
 {
-    public function readExcelFileInfoFromFile(string $filePath)
+    public function readExcelFileInfo(string $filePath)
     {
-        $excelInfo = Excel::toArray(new ExcelViajesTiroImport, $filePath);
+        $importObject = new ExcelViajesTiroImport;
+        $excelInfo = Excel::toArray($importObject, $filePath);
         $arrayInfo = [];
 
         foreach ($excelInfo[0] as $key => $item) {
@@ -21,13 +23,8 @@ class ExcelFileHelper
                 continue;
             }
 
-            $arrayInfo[] = $item;
+            $arrayInfo[] = $importObject->model($item);
 
-            Log::debug("ARRAY INFO " . print_r($item, true));
-
-            /*if ($key == 3) {
-                break;
-            }*/
         }
 
         return $arrayInfo;
