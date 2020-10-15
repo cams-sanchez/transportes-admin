@@ -8,6 +8,7 @@ use App\Models\RepresentanteCliente;
 use App\Models\Temporada;
 use App\Constants\StatusConstants;
 use Carbon\Carbon;
+use PhpParser\Node\Expr\FuncCall;
 
 /**
  * Class TemporadaRepository
@@ -73,7 +74,6 @@ class TemporadaRepository
         $foundTemporada->save();
 
         return $foundTemporada;
-
     }
 
     /**
@@ -93,10 +93,19 @@ class TemporadaRepository
 
     /**
      * @param string $temporadaId
-     * @return mixed
+     * @return Temporada
      */
     public function searchTemporadaById(string $temporadaId)
     {
         return $this->temporadaModel::where('id', '=', $temporadaId)->get()->first();
+    }
+
+    /**
+     * @param string $temporadaName
+     * @return Temporada
+     */
+    public function searchTemporadaByName(string $temporadaName = 'Temporada Generica')
+    {
+        return $this->temporadaModel::where('nombre', '=', $temporadaName)->get()->first();
     }
 }

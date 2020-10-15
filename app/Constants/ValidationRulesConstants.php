@@ -30,7 +30,8 @@ class ValidationRulesConstants
             'establecimiento' => 'required|image|mimes:jpeg,jpg,png'
         ],
         'uploadExcel' => [
-            'excelFile' => 'required|mimes:xls,xlsx'
+            'excelFile' => 'required|mimes:xls,xlsx',
+            'zonaRepublica' => 'required',
         ],
         'searchByDelivery' => [
             'deliveryNumber' => 'required',
@@ -49,6 +50,4 @@ class ValidationRulesConstants
             'nombre' => 'required',
         ],
     ];
-
 }
-

@@ -4,7 +4,6 @@
 namespace App\Handlers;
 
 
-use App\Constants\FileConstants;
 use App\Constants\StatusConstants;
 use App\Helpers\ExcelFileHelper;
 use App\Helpers\FileHelper;
@@ -16,10 +15,12 @@ use App\Models\TiposDeCargaCatalog;
 use App\Models\Tiro;
 use App\Models\Unidad;
 use App\Models\Viaje;
+use App\Models\Tren;
 use App\Repositories\EstablecimientosRepository;
 use App\Repositories\EstadosRepublicaRepository;
 use App\Repositories\EvidenciasRepository;
 use App\Repositories\JefeDeSectorRepository;
+use App\Repositories\TemporadaRepository;
 use App\Repositories\TirosRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
@@ -30,21 +31,16 @@ use PhpOffice\PhpSpreadsheet\Shared\Date;
 class ExcelFileUploadHandler
 {
 
-    /**
-     * @var FileHelper
-     */
+    /** @var FileHelper */
     protected FileHelper $fileHelper;
-    /**
-     * @var TirosRepository
-     */
+
+    /** @var TirosRepository */
     protected TirosRepository $tiroRepository;
-    /**
-     * @var JefeDeSectorRepository
-     */
+
+    /** @var JefeDeSectorRepository */
     protected JefeDeSectorRepository $jefeDeSector;
-    /**
-     * @var EstablecimientosRepository
-     */
+
+    /** @var EstablecimientosRepository */
     protected EstablecimientosRepository $establecimientoRepository;
 
     /** @var EstadosRepublicaRepository */
@@ -52,6 +48,9 @@ class ExcelFileUploadHandler
 
     /** @var EvidenciasRepository $evidenciasRepository */
     protected EvidenciasRepository $evidenciasRepository;
+
+    /** @var TemporadaRepository $temporadaRepository */
+    protected TemporadaRepository $temporadaRepository;
 
     /** @var array $infoFromExcel */
     protected $infoFromExcel = [];
@@ -61,6 +60,10 @@ class ExcelFileUploadHandler
 
     /** @var string $s3ExceliFileUrl */
     protected string $s3ExceliFileUrl = '';
+
+    /** @var string $zonaRepublica */
+    protected string $zonaRepublica = '';
+
     /**
      * ExcelFileUploadHandler constructor.
      * @param FileHelper $fileHelper
@@ -70,16 +73,18 @@ class ExcelFileUploadHandler
      * @param EstablecimientosRepository $establecimientoRepository
      * @param EstadosRepublicaRepository $estadosRepublicaRepository
      * @param EvidenciasRepository $evidenciasRepository
+     * @param TemporadaRepository $temporadaRepository
      */
-    public function __construct(FileHelper $fileHelper,
-                                ExcelFileHelper $excelFileHelper,
-                                TirosRepository $tiroRepository,
-                                JefeDeSectorRepository $jefeDeSector,
-                                EstablecimientosRepository $establecimientoRepository,
-                                EstadosRepublicaRepository $estadosRepublicaRepository,
-                                EvidenciasRepository $evidenciasRepository
-    )
-    {
+    public function __construct(
+        FileHelper $fileHelper,
+        ExcelFileHelper $excelFileHelper,
+        TirosRepository $tiroRepository,
+        JefeDeSectorRepository $jefeDeSector,
+        EstablecimientosRepository $establecimientoRepository,
+        EstadosRepublicaRepository $estadosRepublicaRepository,
+        EvidenciasRepository $evidenciasRepository,
+        TemporadaRepository $temporadaRepository
+    ) {
         $this->fileHelper = $fileHelper;
         $this->excelFileHelper = $excelFileHelper;
         $this->tiroRepository = $tiroRepository;
@@ -87,6 +92,7 @@ class ExcelFileUploadHandler
         $this->establecimientoRepository = $establecimientoRepository;
         $this->estadosRepublicaRepository = $estadosRepublicaRepository;
         $this->evidenciasRepository = $evidenciasRepository;
+        $this->temporadaRepository = $temporadaRepository;
     }
 
     public function saveUploadedFile(array $excelFileResource)
@@ -113,6 +119,7 @@ class ExcelFileUploadHandler
 
     public function processUploadedExcelFile(array $excelFileResource)
     {
+        $this->zonaRepublica = $excelFileResource['zonaRepublica'];
         $this->excelFilePath = $this->saveUploadedFile($excelFileResource);
         $this->saveExcelFileToS3();
         $this->getS3Url();
@@ -128,7 +135,6 @@ class ExcelFileUploadHandler
 
             $this->createNewTiro($newTiro);
         }
-
     }
 
     public function createNewTiro(array $newTiro)
@@ -136,7 +142,8 @@ class ExcelFileUploadHandler
         $this->tiro = $this->tiroRepository->getTiroByDeliveryNumber(
             [
                 'deliveryNumber' => $newTiro['delivery']
-            ]);
+            ]
+        );
 
 
         if (empty($this->tiro)) {
@@ -144,7 +151,7 @@ class ExcelFileUploadHandler
             $jefeDeSector = $this->dealWithJefeDeSector($newTiro['jefeDeSector']);
             $establecimiento = $this->dealWithEstablecimientoInformation($newTiro['nombre']);
 
-            $viaje = Viaje::get()->first();
+            $viaje = $this->dealWithTrenAndViajeCreation();
             $unidad = Unidad::get()->first();
             $carga = TiposDeCargaCatalog::get()->first();
 
@@ -179,7 +186,8 @@ class ExcelFileUploadHandler
         $this->tiro->evidencias = $evidencias;
     }
 
-    protected function saveEvidencias($evidenciaType='delivery') {
+    protected function saveEvidencias($evidenciaType = 'delivery')
+    {
         $evidencia = new Evidencia();
 
         $evidencia->tiro_id = $this->tiro->id;
@@ -195,7 +203,6 @@ class ExcelFileUploadHandler
         $evidencia->save();
 
         return $evidencia;
-
     }
 
     public function dealWithEstadoInformation(string $estadoToWorkWith)
@@ -246,5 +253,37 @@ class ExcelFileUploadHandler
         }
 
         return $jefeDeSector;
+    }
+
+    public function dealWithTrenAndViajeCreation()
+    {
+        $temporada = $this->temporadaRepository->searchTemporadaByName();
+        $tren = new Tren();
+        $fecha = Carbon::now();
+
+        $tren->temporada_id = $temporada->id;
+        $tren->nombre = "Tren Zona {$this->zonaRepublica} {$fecha->format('m-d-Y')}";
+        $tren->zona = $this->zonaRepublica;
+        $tren->descripcion = '';
+        $tren->fecha_comienzo = $fecha;
+        $tren->fecha_fin = null;
+        $tren->status = 'ACTIVO';
+        $tren->save();
+
+
+        $viaje = new Viaje();
+        $estadoRep = EstadosReplubicaCatalog::where('estado', '=', 'Estado de México')->first();
+
+        $viaje->tren_id = $tren->id;
+        $viaje->estados_replubica_catalogs_id = $estadoRep->id;
+        $viaje->nombre = "Viaje_{$this->zonaRepublica}_{$fecha->format('m-d-Y')}";
+        $viaje->fecha_comienzo = $fecha;
+        $viaje->fecha_carga = $fecha;
+        $viaje->fecha_salida_carga = null;
+        $viaje->status = 'ACTIVO';
+
+        $viaje->save();
+
+        return $viaje;
     }
 }

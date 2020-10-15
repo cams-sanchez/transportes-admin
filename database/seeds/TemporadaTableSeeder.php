@@ -29,5 +29,21 @@ class TemporadaTableSeeder extends Seeder
         $temporada->status = 'ACTIVO';
 
         $temporada->save();
+
+        $temporada2 = new Temporada();
+
+        $representateCliente = RepresentanteCliente::where('nombre', '=', 'Jose Perez Leon')->first();
+        $fecha = Carbon::now();
+
+        $temporada2->autorizado_por = $representateCliente->id;
+        $temporada2->nombre = 'Temporada Generica';
+        $temporada2->descripcion = 'Para usar de manera General en todos los tiros y viajes';
+        $temporada2->fecha_inicio_estipulada = $fecha->add(1, 'day');
+        $temporada2->fecha_inicio_real = $fecha->add(10, 'day');
+        $temporada2->fecha_fin_estipulada = $fecha->add(30, 'day');
+        $temporada2->fecha_fin_real = null;
+        $temporada2->status = 'ACTIVO';
+
+        $temporada2->save();
     }
 }

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 
 
 ini_set('memory_limit', '500M');
-set_time_limit ( 180 );
+set_time_limit(180);
 
 class TiroController extends Controller
 {
@@ -60,8 +60,7 @@ class TiroController extends Controller
         ExcelFileUploadHandler $excelHandler,
         EvidenciasImagesHandler $evidenciasImagesHandler,
         StatisticsHandler $statisticsHandler
-    )
-    {
+    ) {
         $this->tiroRepository = $tiroRepository;
         $this->decorator = $decorator;
         $this->validator = $validator;
@@ -138,6 +137,7 @@ class TiroController extends Controller
 
         $excelInfo = [
             'excelFile' => $request->file('excelFile'),
+            'zonaRepublica' => $request->get('zonaRepublica'),
         ];
 
         Log::debug("INCOMING EXCEL VALUES " . print_r($excelInfo, true));
