@@ -25,13 +25,13 @@ class CreateClientesTable extends Migration
             $table->string('num_ext',20);
             $table->string('num_int', 20);
             $table->string('cp', 6)->index();
-            $table->string('estados_replubica_catalogs_id', 50)->index()->nullable(true);
+            $table->uuid('estados_replubica_catalogs_id', 50)->index()->nullable(true);
             $table->string('municipio', 100);
             $table->string('fiscal_calle', 200);
             $table->string('fiscal_num_ext',20);
             $table->string('fiscal_num_int', 20);
             $table->string('fiscal_cp', 6)->index();
-            $table->string('fiscal_estados_replubica_catalogs_id', 50)->index()->nullable(true);
+            $table->uuid('fiscal_estados_replubica_catalogs_id', 50)->index()->nullable(true);
             $table->string('fiscal_municipio', 100);
             $table->timestamps();
 

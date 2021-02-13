@@ -16,8 +16,8 @@ class CreateIncidentesTable extends Migration
     {
         Schema::create('incidentes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('tiro_id', 50)->index();
-            $table->string('tipo_incidencia_id', 50)->index();
+            $table->uuid('tiro_id', 50)->index();
+            $table->uuid('tipo_incidencia_id', 50)->index();
             $table->dateTime('fecha_comienzo')->default(Carbon::now())->index();
             $table->dateTime('fecha_termino')->default(Carbon::now())->index();
             $table->mediumText('detalles');

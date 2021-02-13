@@ -15,7 +15,7 @@ class CreateTemporadasTable extends Migration
     {
         Schema::create('temporadas', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('autorizado_por', 50)->index();
+            $table->uuid('autorizado_por', 50)->index();
             $table->string('nombre', 200)->index();
             $table->string('descripcion', 200);
             $table->date('fecha_inicio_estipulada')->index()->nullable(true);

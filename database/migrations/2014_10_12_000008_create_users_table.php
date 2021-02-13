@@ -15,9 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('company_id', 50)->index();
-            $table->string('transportista_id', 50)->index();
-            $table->string('tipo_usuarios_id', 50)->index();
+            $table->uuid('company_id', 50)->index();
+            $table->uuid('transportista_id', 50)->index();
+            $table->uuid('tipo_usuarios_id', 50)->index();
             $table->string('name')->index();
             $table->string('email')->unique()->index();
             $table->timestamp('email_verified_at')->nullable();
@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('num_ext',20);
             $table->string('num_int', 20);
             $table->string('cp', 6)->index();
-            $table->string('estados_replubica_catalogs_id', 50)->index();
+            $table->uuid('estados_replubica_catalogs_id', 50)->index();
             $table->string('municipio', 100);
             $table->timestamps();
 

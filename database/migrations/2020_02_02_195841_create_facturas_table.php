@@ -16,8 +16,8 @@ class CreateFacturasTable extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('viaje_id', 50)->index();
-            $table->string('uploaded_by', 50)->index();
+            $table->uuid('viaje_id', 50)->index();
+            $table->uuid('uploaded_by', 50)->index();
             $table->date('fecha_upload')->index()->default(Carbon::now());
             $table->date('fecha_pago')->index();
             $table->decimal('monto', 8,2);

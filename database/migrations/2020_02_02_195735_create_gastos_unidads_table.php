@@ -16,8 +16,8 @@ class CreateGastosUnidadsTable extends Migration
     {
         Schema::create('gastos_unidads', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('unidad_id', 50)->index();
-            $table->string('gasto_id', 50)->index();
+            $table->uuid('unidad_id', 50)->index();
+            $table->uuid('gasto_id', 50)->index();
             $table->decimal('cantidad',8, 2);
             $table->decimal('total', 8, 2);
             $table->dateTime('fecha')->index()->default(Carbon::now());

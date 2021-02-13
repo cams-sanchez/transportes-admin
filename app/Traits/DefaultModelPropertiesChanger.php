@@ -8,7 +8,7 @@ use Ramsey\Uuid\Uuid;
 
 trait DefaultModelPropertiesChanger
 {
-    protected static function boot()
+    public static function boot()
     {
         parent::boot();
         static::creating(function (Model $model) {

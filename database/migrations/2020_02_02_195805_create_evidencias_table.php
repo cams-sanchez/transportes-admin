@@ -16,7 +16,7 @@ class CreateEvidenciasTable extends Migration
     {
         Schema::create('evidencias', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('tiro_id',50)->index();
+            $table->uuid('tiro_id',50)->index();
             $table->string('tipo',50)->index();
             $table->dateTime('fecha_evidencia')->default(Carbon::now())->index();
             $table->string('foto_url', 200)->index();

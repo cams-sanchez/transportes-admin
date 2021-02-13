@@ -15,7 +15,7 @@ class CreateTrensTable extends Migration
     {
         Schema::create('trens', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('temporada_id', 50)->index();
+            $table->uuid('temporada_id', 50)->index();
             $table->string('nombre', 150)->index();
             $table->string('zona', 50)->index();
             $table->string('descripcion',200);

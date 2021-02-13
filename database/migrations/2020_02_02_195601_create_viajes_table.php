@@ -15,8 +15,8 @@ class CreateViajesTable extends Migration
     {
         Schema::create('viajes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('tren_id', 50)->index();
-            $table->string('estados_replubica_catalogs_id', 50)->index();
+            $table->uuid('tren_id', 50)->index();
+            $table->uuid('estados_replubica_catalogs_id', 50)->index();
             $table->string('nombre', 150)->index();
             $table->date('fecha_comienzo')->index()->nullable(true);
             $table->date('fecha_carga')->index()->nullable(true);

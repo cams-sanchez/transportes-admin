@@ -16,8 +16,8 @@ class CreateGastosTirosTable extends Migration
     {
         Schema::create('gastos_tiros', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('tiro_id', 50)->index();
-            $table->string('tipos_de_gasto_catalogs_id', 50)->index();
+            $table->uuid('tiro_id', 50)->index();
+            $table->uuid('tipos_de_gasto_catalogs_id', 50)->index();
             $table->dateTime('fecha_gasto')->default(Carbon::now())->index();
             $table->decimal('cantidad', 8, 2);
             $table->decimal('total', 8, 2);

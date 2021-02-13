@@ -15,9 +15,9 @@ class CreateOperadoresTable extends Migration
     {
         Schema::create('operadores', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('operador_id')->index();
-            $table->string('viaje_id', 50)->index()->nullable(true);
-            $table->string('tiro_id', 50)->index()->nullable(true);
+            $table->uuid('operador_id')->index();
+            $table->uuid('viaje_id', 50)->index()->nullable(true);
+            $table->uuid('tiro_id', 50)->index()->nullable(true);
             $table->boolean('is_supervisor')->default(false);
             $table->boolean('operator_change')->default(false);
             $table->text('reason_of_change');

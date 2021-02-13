@@ -15,14 +15,14 @@ class CreateTirosTable extends Migration
     {
         Schema::create('tiros', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('viaje_id', 50)->index();
+            $table->uuid('viaje_id', 50)->index();
             $table->string('ciudad', 50)->index();
-            $table->string('unidad_id', 50)->index();
-            $table->string('establecimiento_id', 50)->index();
-            $table->string('tipo_carga_id', 50)->index();
+            $table->uuid('unidad_id', 50)->index();
+            $table->uuid('establecimiento_id', 50)->index();
+            $table->uuid('tipo_carga_id', 50)->index();
             $table->decimal('cantidad', 8, 2);
             $table->string('delivery', 20)->index();
-            $table->string('jefe_de_sector_id', 50)->index();
+            $table->uuid('jefe_de_sector_id', 50)->index();
             $table->string('region', 20)->index();
             $table->date('fecha_entrega_solicitada')->index();
             $table->date('propuesta_361')->index();

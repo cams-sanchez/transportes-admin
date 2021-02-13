@@ -15,8 +15,8 @@ class CreateMantenimientosTable extends Migration
     {
         Schema::create('mantenimientos', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('unidad_id', 50)->index();
-            $table->string('tipo_mantenimiento_id', 50)->index();
+            $table->uuid('unidad_id', 50)->index();
+            $table->uuid('tipo_mantenimiento_id', 50)->index();
             $table->date('fecha_entrada')->index();
             $table->date('fecha_salida')->index();
             $table->decimal('costo');
