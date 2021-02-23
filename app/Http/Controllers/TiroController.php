@@ -153,7 +153,7 @@ class TiroController extends Controller
         }
 
 
-        return response()->json($this->decorator->decorateSuccesfullFileUpload(), 200);
+        return response()->json($this->decorator->decorateSuccessfulFileUpload(), 200);
     }
 
     public function tirosByDateRange(string $startDate, string $endDate)

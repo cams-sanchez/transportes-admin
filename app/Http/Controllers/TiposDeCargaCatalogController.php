@@ -7,7 +7,6 @@ use App\Validators\ValidationRules;
 use App\Repositories\TiposDeCargaRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -29,6 +28,7 @@ class TiposDeCargaCatalogController extends Controller
      * TiposDeCargaCatalogController constructor.
      * @param TiposDeCargaRepository $tiposDeCargaRepository
      * @param TiposDeCargaCatalogControllerDecorator $decorator
+     * @param ValidationRules $validator
      */
     public function __construct(
         TiposDeCargaRepository $tiposDeCargaRepository,
@@ -46,21 +46,15 @@ class TiposDeCargaCatalogController extends Controller
      *
      * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $tiposDeCarga = $this->tiposDeCargaRepository->getAllTiposDeCarga();
 
         return response()->json($this->decorator->decorateAllTiposDeCargaResponse($tiposDeCarga));
     }
 
-    public function createNewTipoCarga(Request $request)
+    public function createNewTipoCarga(Request $request): JsonResponse
     {
-
-        $validator = Validator::make($request->all(), $this->validator->getRules('new'));
-
-        if ($validator->fails()) {
-            return response()->json($this->decorator->decorateErrorValidationResponse($validator->messages()->first()));
-        }
 
         $tipoDeCarga = [
             'nombre' => $request->get('nombre'),
@@ -73,15 +67,8 @@ class TiposDeCargaCatalogController extends Controller
         return response()->json($this->decorator->decorateResponseTipoDeCarga($newTipoDeCarga));
     }
 
-    public function updateTipoDeCarga(Request $request)
+    public function updateTipoDeCarga(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), $this->validator->getRules('edit'));
-
-        if ($validator->fails()) {
-            return response()->json($this->decorator->decorateErrorValidationResponse($validator->messages()->first()));
-        }
-
-
         $tipoDeCarga = [
             'id' => $request->get('id'),
             'nombre' => $request->get('nombre'),
