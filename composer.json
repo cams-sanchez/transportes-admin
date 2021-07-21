@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|^8.0",
         "ext-imagick": "*",
         "ext-json": "*",
         "fideloper/proxy": "^4.0",
@@ -27,7 +27,8 @@
         "fzaninotto/faker": "^1.9.1",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^9.0",
+        "laravel/sail": "^1.0.1"
     },
     "config": {
         "optimize-autoloader": true,
