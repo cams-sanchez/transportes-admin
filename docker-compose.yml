@@ -22,25 +22,8 @@ services:
             - redis
             - meilisearch
             - selenium
-    pgsql:
-      image: 'postgres:13'
-      ports:
-        - '${DB_PGSQL_PORT:-5432}:5432'
-      environment:
-        PGPASSWORD: '${DB_PGSQL_PASSWORD:-secret}'
-        POSTGRES_DB: '${DB_PGSQL_DATABASE}'
-        POSTGRES_USER: '${DB_PGSQL_USERNAME}'
-        POSTGRES_PASSWORD: '${DB_PGSQL_PASSWORD:-secret}'
-      volumes:
-        - 'sailpgsql:/var/lib/postgresql/data'
-      networks:
-        - sail
-      healthcheck:
-        test: [ "CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}" ]
-        retries: 3
-        timeout: 5s
     mysql:
-        image: 'mysql:8.0'
+        image: 'mariadb'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
@@ -100,8 +83,6 @@ networks:
 volumes:
     sailmysql:
         driver: local
-    sailpgsql:
-      driver: local
     sailredis:
         driver: local
     sailmeilisearch:
