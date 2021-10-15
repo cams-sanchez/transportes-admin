@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class AuthController
@@ -36,7 +37,7 @@ class AuthController extends Controller
             'email' => 'required|exists:users',
             'password' => 'required'
         ];
-
+        Log::debug('RUFUS__________________--');
         $request->validate($rules);
 
         $incommingData = [
@@ -45,6 +46,8 @@ class AuthController extends Controller
             'status' => 'ACTIVO'
         ];
 
+
+
         if (Auth::attempt($incommingData)) {
             $user = Auth::user();
 
@@ -52,9 +55,11 @@ class AuthController extends Controller
             $tokenResult->token->expires_at = Carbon::now()->addMinute(180);
             $tokenResult->token->save();
 
+            Log::debug('We have Tocker ');
             return response()->json($this->authDecorator->decorateLoginUserResponse($user, $tokenResult));
 
         } else {
+            Log::debug('FUBAR');
             return response()->json('Unauthorized', 401);
         }
     }
